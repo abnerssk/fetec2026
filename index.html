@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFOTEC - Informática para Internet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="shortcut icon" href="assets/infologo.svg" type="image/x-icon">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+    /* Variáveis do Tema Escuro (Padrão) */
+    :root {
+      --ultrablack: #000000;
+      --black: #111111;
+      --bg: #0f0f0f;
+      --bg-2: #122235;
+      --surface: #1a2633;
+      --surface-2: #18344a;
+      --surface-3: #162a3c;
+      --text: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.75);
+      --muted: rgba(255, 255, 255, 0.65);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --accent: #00ff73;
+      --accent-2: #8fd1ff;
+      --header: #050505;
+      --header-dark: #000000;
+      --header-border: rgba(255, 255, 255, 0.12);
+      --card-bg: rgba(255, 255, 255, 0.015);
+      --card-bg-hover: rgba(255, 255, 255, 0.045);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+      
+      /* Gradientes e Overlays */
+      --overlay-1: rgba(0, 0, 0, 0.65);
+      --overlay-2: rgba(0, 0, 0, 0.85);
+      --panel-bg-1: rgba(22, 42, 60, 0.98);
+      --panel-bg-2: rgba(19, 34, 48, 0.98);
+      --preview-overlay-1: rgba(3, 9, 15, 0.08);
+      --preview-overlay-2: rgba(3, 9, 15, 0.45);
+      
+      --title-glow: 0 0 20px rgba(0, 255, 115, 0.4);
+      
+      /* Cores do Bloco de Código */
+      --code-text: #d4d4d4;
+      --code-keyword: #569cd6;
+      --code-string: #ce9178;
+      --code-variable: #9cdcfe;
+    }
+
+    /* Variáveis do Tema Claro */
+    body.light-mode {
+      --ultrablack: #f0f4f8;
+      --black: #ffffff;
+      --bg: #f8fafc;
+      --bg-2: #e2e8f0;
+      --surface: #ffffff;
+      --surface-2: #f1f5f9;
+      --surface-3: #e2e8f0;
+      --text: #0f172a;
+      --text-dim: rgba(15, 23, 42, 0.9);
+      --muted: rgba(15, 23, 42, 0.85);
+      --border: rgba(15, 23, 42, 0.15);
+      --border-strong: rgba(15, 23, 42, 0.3);
+      --accent: #00ba52; 
+      --accent-2: #0284c7;
+      --header: #ffffff;
+      --header-dark: #f1f5f9;
+      --header-border: rgba(0, 0, 0, 0.08);
+      --card-bg: rgba(15, 23, 42, 0.02);
+      --card-bg-hover: rgba(15, 23, 42, 0.05);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      
+      --overlay-1: rgba(255, 255, 255, 0.70);
+      --overlay-2: rgba(255, 255, 255, 0.85);
+      --panel-bg-1: rgba(255, 255, 255, 0.98);
+      --panel-bg-2: rgba(248, 250, 252, 0.98);
+      --preview-overlay-1: rgba(255, 255, 255, 0.2);
+      --preview-overlay-2: rgba(255, 255, 255, 0.7);
+      
+      --title-glow: none;
+      
+      --code-text: #334155;
+      --code-keyword: #0000ff;
+      --code-string: #a31515;
+      --code-variable: #001080;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    html, body {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--accent);
+      border-radius: 20px;
+    }
+
+    body {
+      line-height: 1.6;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Inverte a cor do logo para que ele fique legível no modo claro */
+    body.light-mode .logoL,
+    body.light-mode .logoM {
+      filter: invert(1) hue-rotate(180deg) brightness(0.2);
+    }
+
+    /* Estilo para o link do logo */
+    .logo-link {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      text-decoration: none;
+    }
+
+    .logo-link:hover {
+      transform: scale(1.05); /* Pequeno zoom no logo ao passar o mouse */
+    }
+
+    .logoL {
+      width: 150px;
+      height: auto;
+    }
+
+    .container .logoL {
+      margin-bottom: 20px;
+    }
+
+    header {
+      background-color: var(--header);
+      border-bottom: 1px solid var(--header-border);
+      color: var(--text);
+      padding: 1rem 4%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 20;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      transition: .15s ease-in-out;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    #theme-toggle {
+      background-color: transparent;
+      color: var(--text);
+      font-size: 1.5rem;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .fas {
+      transition: .2s ease;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      background-color: transparent;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .menu-toggle:hover {
+      color: var(--accent);
+    }
+
+    #nav-menu {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    main {
+      padding: 0;
+    }
+
+    .container {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ===== SEÇÃO FETEC ===== */
+    .section-fetec {
+      width: 100%;
+      background-color: var(--ultrablack);
+      background-image: 
+        linear-gradient(to bottom, transparent 75%, var(--black) 100%),
+        linear-gradient(var(--overlay-1), var(--overlay-2)), 
+        url('assets/dragon.png'),
+        url('https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUybWx6Z3lqOXo1aXM3OWx3YnhvcDRncGFobDNzN2Njamd2NDh4eTR5YiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/xULW8l2gXuRPmsQe8U/source.gif'), 
+        linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
+      background-position: 80% bottom, center, 90% center, center, center;
+      background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+      background-size: 100% 100%, cover, contain, cover, cover; 
+      
+      color: var(--text);
+      /* Alterado para subir o conteúdo: padding-top maior, align-items flex-start */
+      padding: 18vh 2rem 5rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Overrides do Modo Claro para a Seção Fetec */
+    body.light-mode .section-fetec {
+      /* Adicionada uma terceira camada linear-gradient escurecida (0.18) acima do dragão */
+      background-image: 
+        linear-gradient(to bottom, transparent 75%, var(--black) 100%),
+        linear-gradient(var(--overlay-1), var(--overlay-2)), 
+        linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)), 
+        url('assets/dragon.png'),
+        url('https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUybWx6Z3lqOXo1aXM3OWx3YnhvcDRncGFobDNzN2Njamd2NDh4eTR5YiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/xULW8l2gXuRPmsQe8U/source.gif'), 
+        linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
+      background-position: 80% bottom, center, center, 90% center, center, center;
+      background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+      background-size: 100% 100%, cover, cover, contain, cover, cover; 
+    }
+
+    .fetec-wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start; /* Alinhado à esquerda */
+    }
+
+    .section-fetec .container {
+      max-width: 650px; /* Largura reduzida para melhor leitura à esquerda */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Alinhado à esquerda */
+    }
+
+    .fetec-title {
+      font-family: "Chakra Petch", sans-serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: var(--title-glow); 
+      text-align: left;
+    }
+
+    .fetec-subtitle {
+      color: var(--accent);
+      font-size: 1.15rem;
+      font-weight: 600; /* Aumentado para melhor legibilidade */
+      margin-bottom: 2rem;
+      text-align: left;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.7); /* Adicionado sombra */
+    }
+
+    .section-fetec .container p {
+      text-align: left; 
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+      color: #f1f5f9; /* Branco mais forte que o anterior var(--muted) */
+      font-weight: 500; /* Aumentado para melhor legibilidade */
+      font-size: 1.1rem; 
+      text-align: justify;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.7); /* Adicionado sombra */
+    }
+
+    /* Cores Específicas do Modo Claro para Textos */
+    body.light-mode .fetec-subtitle {
+      color: #007a33; /* Verde mais escuro para contraste */
+      font-weight: 700;
+      text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+    }
+
+    body.light-mode .section-fetec .container p {
+      color: #0f172a; /* Texto bem escuro */
+      font-weight: 600;
+      text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+    }
+
+    /* BOTAO CORRIGIDO PARA RESPONSIVIDADE */
+    .section-fetec .container a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--accent);
+      color: #000;
+      text-decoration: none;
+      font-family: "Chakra Petch", sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.8rem 2.2rem;
+      margin-top: 1rem;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .section-fetec .container a.btn:hover {
+      background-color: #00e668; 
+      transform: translateY(-2px);
+    }
+
+    /* ===== SEÇÃO CURSO (ESTILO CÓDIGO) ===== */
+    .section-curso {
+      background-color: var(--black);
+      color: var(--text);
+      padding: 5rem 2rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .curso-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5rem;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .section-curso h1 {
+      font-family: "Chakra Petch", sans-serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .code-style-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem; 
+    }
+
+    .code-line {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 1.05rem;
+      color: var(--code-text);
+    }
+
+    .normal-text {
+      font-family: "Inter", sans-serif;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .code-keyword { color: var(--code-keyword); } 
+    .code-string { color: var(--code-string); }  
+    .code-variable { color: var(--code-variable); } 
+
+    .video-frame {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .video-frame iframe {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+    }
+
+    /* ===== EXPOSIÇÕES ===== */
+    .section-exposicoes {
+      background: linear-gradient(180deg, var(--black) 0%, var(--bg-2) 100%);
+      color: var(--text);
+      padding: 3rem 2rem 4rem;
+    }
+
+    .exposicoes-topo {
+      max-width: 1280px;
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .exposicoes-topo h2 {
+      font-family: "Chakra Petch", sans-serif;
+      font-size: clamp(1.7rem, 2vw, 2.4rem);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .expo-all-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-family: "Chakra Petch", sans-serif;
+      font-weight: 600;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+      white-space: nowrap;
+    }
+
+    .expo-all-btn:hover {
+      transform: translateY(-1px);
+      background: var(--border-strong);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .expo-carousel {
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr) 96px;
+      align-items: stretch;
+      gap: 0.9rem;
+      overflow: hidden; /* Evita que a animação escape do layout */
+      padding: 10px 0; /* Espaço para o box-shadow */
+    }
+
+    .expo-preview {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      min-height: 360px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      opacity: 0.88;
+      cursor: pointer;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .expo-preview:hover {
+      transform: scale(1.01);
+      opacity: 1;
+    }
+
+    .expo-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.78) brightness(0.7);
+      transform: scale(1.05);
+    }
+
+    .expo-preview .expo-preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--preview-overlay-1), var(--preview-overlay-2));
+    }
+
+    .expo-feature {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr);
+      min-height: 360px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface-2);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .expo-feature:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+    }
+    
+    /* ANIMAÇÕES DO CARROSSEL (Slide e Fade) */
+    @keyframes slideInNext {
+      0% { opacity: 0; transform: translateX(50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInPrev {
+      0% { opacity: 0; transform: translateX(-50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    .slide-in-next {
+      animation: slideInNext 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    .slide-in-prev {
+      animation: slideInPrev 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes fadeImg {
+      0% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+    .fade-img {
+      animation: fadeImg 0.3s ease-in-out forwards;
+    }
+
+    .expo-media {
+      position: relative;
+      background: #000;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      max-width: 1920px;
+      max-height: 1080px;
+    }
+
+    .expo-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .expo-panel {
+      padding: 1.3rem 1.2rem 1.15rem;
+      background: linear-gradient(180deg, var(--panel-bg-1), var(--panel-bg-2));
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      justify-content: space-between;
+      min-width: 0;
+      transition: background 0.3s ease;
+    }
+
+    .expo-panel.expo-panel--compact {
+      justify-content: flex-start;
+      gap: 0.55rem;
+    }
+
+    .expo-panel.expo-panel--compact .expo-miniaturas {
+      margin-top: 0;
+    }
+
+    .expo-panel.expo-panel--compact .expo-tag {
+      margin-top: 0;
+    }
+
+    .expo-panel.expo-panel--compact .expo-btn {
+      margin-top: auto;
+    }
+
+    .expo-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      width: fit-content;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--accent-2);
+      margin-top: 0.15rem;
+    }
+
+    .expo-tag i {
+      font-size: 0.8rem;
+    }
+
+    .expo-panel h3 {
+      font-family: "Chakra Petch", sans-serif;
+      font-size: clamp(1.6rem, 2.1vw, 2.3rem);
+      line-height: 1.05;
+      margin-top: 0.1rem;
+    }
+
+    .expo-panel p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.55;
+      margin-top: 0.35rem;
+    }
+
+    .expo-miniaturas {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.55rem;
+      margin-top: 0.2rem;
+    }
+
+    .expo-miniaturas img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 8px;
+      opacity: 0.9;
+      transition: transform .2s ease, opacity .2s ease;
+      cursor: pointer;
+    }
+
+    .expo-miniaturas img:hover {
+      transform: scale(1.03);
+      opacity: 1;
+    }
+
+    .expo-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%; 
+      padding: 0.9rem 1.6rem;
+      background: var(--accent);
+      color: #000000; 
+      text-decoration: none;
+      font-family: "Chakra Petch", sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+    
+    .expo-btn:hover {
+      background-color: #00e668;
+      transform: translateY(-2px);
+    }
+
+    .expo-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--surface-3);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-size: 1.1rem;
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .expo-arrow:hover {
+      background: rgba(0, 255, 115, 0.2);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .expo-prev {
+      left: -18px;
+    }
+
+    .expo-next {
+      right: -18px;
+    }
+
+    .expo-dots {
+      max-width: 1280px;
+      margin: 1rem auto 0;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .expo-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: none;
+      background: var(--border-strong);
+      cursor: pointer;
+      transition: all 0.3s ease-in-out; 
+    }
+
+    .expo-dot.active {
+      width: 35px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    /* ===== CARDS SECUNDÁRIOS ===== */
+    .expo-lista {
+      max-width: 1280px;
+      margin: 3.5rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+      align-items: stretch;
+      grid-auto-rows: 1fr;
+    }
+
+    .expo-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      color: var(--text);
+      display: flex;
+      gap: 1.2rem;
+      align-items: center; 
+      transition: all .25s ease;
+      min-height: auto; 
+      height: 100%; 
+      cursor: pointer;
+      box-shadow: none;
+      user-select: none;
+      text-decoration: none;
+    }
+
+    .expo-card:hover {
+      transform: translateY(-2px);
+      background: var(--card-bg-hover);
+      border-color: var(--border-strong);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .expo-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .expo-card img {
+      width: 95px; 
+      height: 95px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+      pointer-events: none;
+      opacity: 0.65;
+      filter: saturate(0.8) contrast(0.9);
+      transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .expo-card:hover img {
+      opacity: 1;
+      filter: saturate(1) contrast(1);
+      transform: scale(1.05);
+    }
+
+    .expo-card > div {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      flex: 1;
+      height: auto;
+      justify-content: center; 
+    }
+
+    .expo-card h4 {
+      font-family: "Chakra Petch", sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.2;
+      margin-bottom: 0.3rem;
+      color: var(--text-dim);
+      transition: color 0.25s ease;
+    }
+
+    .expo-card:hover h4 {
+      color: var(--text);
+    }
+
+    .expo-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+      margin-bottom: 0.2rem; 
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .expo-card a {
+      display: inline-block;
+      margin-top: 0.4rem; 
+      color: var(--accent-2);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.78rem;
+      opacity: 0.5;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: opacity 0.25s ease;
+    }
+
+    .expo-card:hover a {
+      opacity: 1;
+    }
+
+    /* ===== RODAPÉ (FOOTER) ===== */
+    footer {
+      background-color: var(--bg-2);
+      color: var(--text);
+      padding: 2.5rem 2rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-text-group {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.95rem;
+      color: var(--text);
+      flex-wrap: wrap;
+    }
+
+    .footer-text-group .logoM {
+      height: 15px;
+      width: auto;
+      display: inline-block;
+    }
+
+    .footer-text-group .credit {
+      color: var(--muted);
+      margin-left: 0.2rem;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 1.3rem;
+      text-decoration: none;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: var(--accent);
+      transform: scale(1.15);
+    }
+
+    /* Ajuste de Navegação e Responsividade */
+    @media (max-width: 1180px) {
+      .expo-carousel {
+        grid-template-columns: 72px minmax(0, 1fr) 72px;
+      }
+
+      .expo-lista {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 920px) {
+      .exposicoes-topo {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .expo-carousel {
+        grid-template-columns: 1fr;
+      }
+
+      .expo-prev,
+      .expo-next,
+      .expo-preview {
+        display: none;
+      }
+
+      .expo-feature {
+        grid-template-columns: 1fr;
+      }
+
+      .expo-media {
+        aspect-ratio: 16 / 9;
+      }
+
+      .expo-lista {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 1.5rem;
+      }
+
+      #nav-menu {
+        position: static;
+        transform: none;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        display: none;
+        position: absolute;
+        width: 100%;
+        top: 100%;
+        left: 0;
+        background-color: var(--header);
+        border-bottom: 1px solid var(--header-border);
+        padding: 1rem;
+        border-radius: 0 0 5px 5px;
+      }
+
+      nav ul.show {
+        display: block;
+      }
+
+      nav li {
+        padding: 10px 0;
+      }
+
+      #nav-menu {
+        margin-right: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+        transition: .2s ease-in-out;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      .section-fetec {
+        min-height: auto;
+        padding: 3rem 1.5rem; /* Reseta o padding customizado do mobile para manter natural */
+        background-position: center bottom, center, center center, center, center;
+        background-size: 100% 100%, cover, contain, cover, cover;
+      }
+
+      /* REGRA ADICIONADA PARA O BOTÃO NO MOBILE: Ocupar 100% da tela */
+      .section-fetec .container a.btn {
+        width: 100%;
+      }
+
+      .fetec-wrapper {
+        justify-content: flex-start;
+      }
+
+      .section-curso {
+        padding: 3rem 1.5rem;
+      }
+
+      .curso-container {
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .video-frame iframe {
+        height: auto;
+        width: 100%;
+      }
+      
+      .expo-lista {
+        margin-top: 2.5rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .footer-text-group {
+        justify-content: center;
+        line-height: 1.8;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .section-exposicoes {
+        padding: 2rem 1rem 3rem;
+      }
+
+      .expo-panel {
+        padding: 1rem;
+      }
+
+      .expo-miniaturas {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .expo-btn,
+      .expo-all-btn {
+        width: 100%;
+      }
+
+      .expo-card {
+        gap: 1rem;
+      }
+
+      .expo-card img {
+        width: 75px;
+        height: 75px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 0.9rem 1rem;
+      }
+
+      .video-frame iframe {
+        aspect-ratio: 16 / 9;
+      }
+
+      .footer-text-group {
+        font-size: 0.85rem;
+      }
+
+      #theme-toggle {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header">
+    <a href="#header" class="logo-link" aria-label="Voltar ao topo">
+      <img src="assets/infotec.svg" alt="imagem da logo" class="logoL">
+    </a>
+    
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="#curso">Curso</a></li>
+        <li><a href="#exposicoes">Exposições</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Alternar tema">
+        <i class="fas fa-sun"></i>
+      </button>
+      <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section id="fetec" class="section-fetec">
+      <div class="fetec-wrapper">
+        <div class="container">
+          <h1 class="fetec-title">FETEC 2026</h1>
+          <h2 class="fetec-subtitle">Exposição Virtual dos Projetos do Curso Informática para Internet</h2>
+          <p>A FETEC é um evento promovido pela Etec Darcy Pereira de Moraes (Itapetininga - SP) e conta com a
+            participação de professores e alunos para exposição de projetos, experimentos e apresentações.</p>
+          <p>Este site foi desenvolvido pelos alunos do 1º, 2º e 3º ano do curso Ensino Médio Integrado ao Técnico em <i>Informática
+              para Internet</i>, proporcionando ao público uma exposição virtual dos projetos e jogos
+            desenvolvidos ao longo do ano.</p>
+          <br>
+          <a href="https://fetecdarcy.github.io/landingpage-fetec2025/" class="btn" target="_blank">Saiba Mais</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="curso" class="section-curso">
+      <div class="curso-container">
+        <div class="container code-style-text">
+          <h1>&lt;Informática para Internet/&gt;</h1>
+          
+          <p class="code-line"><span class="code-keyword">const</span> curso = <span class="code-string">"Informática para Internet"</span>;</p>
+          
+          <p class="normal-text">O curso prepara o aluno para o desenvolvimento de websites, aplicativos, e-commerce e serviços relacionados, além de fornecer uma base sólida em tecnologias de programação, banco de dados e desenvolvimento web.</p>
+          
+          <p class="code-line"><span class="code-variable">skills</span>.push(<span class="code-string">"HTML"</span>, <span class="code-string">"CSS"</span>, <span class="code-string">"JavaScript"</span>, <span class="code-string">"Banco de Dados"</span>);</p>
+          
+          <p class="normal-text">O curso promove habilidades essenciais para a sociedade atual, formando profissionais preparados para o mercado digital. </p>
+          
+          <p class="code-line"><span class="code-keyword">return</span> <span class="code-string">"Vem ser Etec!"</span>;</p>
+        </div>
+
+        <div class="video-frame">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/DdQQlsltrQs" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="exposicoes" class="section-exposicoes">
+      <div class="exposicoes-topo">
+        <h2>Exposições</h2>
+        <a class="expo-all-btn" href="#lista-exposicoes">Ver todas as exposições</a>
+      </div>
+
+      <div class="expo-carousel" id="expoCarousel">
+        <button class="expo-arrow expo-prev" id="expoPrev" type="button" aria-label="Exposição anterior">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="expo-preview expo-preview-left" id="expoPreviewLeft" aria-hidden="true">
+          <img src="./assets/robotica.jpg" alt="">
+          <div class="expo-preview-overlay"></div>
+        </div>
+
+        <article class="expo-feature" id="expoFeatureBlock">
+          <div class="expo-media">
+            <img id="expoMainImage" src="./assets/scratch.jpg" alt="Scratch">
+          </div>
+
+          <div class="expo-panel">
+            <div>
+              <h3 id="expoTitle">Scratch</h3>
+              <p id="expoDescription">Jogos diversos desenvolvidos no Scratch.</p>
+            </div>
+
+            <div class="expo-miniaturas" id="expoThumbs"></div>
+
+            <span class="expo-tag" id="expoTag">
+              <i class="fas fa-star" id="expoTagIcon" aria-hidden="true"></i>
+              <span id="expoTagText">Projeto em destaque</span>
+            </span>
+
+            <a id="expoLink" class="expo-btn"
+              href="https://tavernf.github.io/scratchFetec/?classId=c6af9f25-f24a-40c1-a965-c255e58e8c64&assignmentId=8038706a-d8e9-40b2-9cb1-9293a20190b9&submissionId=cee6d9f2-fc96-513a-1a38-16f6d33ec50d#redes"
+              target="_blank" rel="noopener noreferrer">
+              Saiba Mais
+            </a>
+          </div>
+        </article>
+
+        <div class="expo-preview expo-preview-right" id="expoPreviewRight" aria-hidden="true">
+          <img src="./assets/jogo2.png" alt="">
+          <div class="expo-preview-overlay"></div>
+        </div>
+
+        <button class="expo-arrow expo-next" id="expoNext" type="button" aria-label="Próxima exposição">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="expo-dots" id="expoDots"></div>
+
+      <div class="expo-lista" id="lista-exposicoes">
+        <article class="expo-card" tabindex="0" role="link"
+          data-link="https://tavernf.github.io/scratchFetec/?classId=c6af9f25-f24a-40c1-a965-c255e58e8c64&assignmentId=8038706a-d8e9-40b2-9cb1-9293a20190b9&submissionId=cee6d9f2-fc96-513a-1a38-16f6d33ec50d#redes"
+          data-target="_blank">
+          <img src="./assets/scratch.jpg" alt="Scratch">
+          <div>
+            <h4>Scratch</h4>
+            <p>Jogos diversos desenvolvidos no Scratch.</p>
+            <a href="https://tavernf.github.io/scratchFetec/?classId=c6af9f25-f24a-40c1-a965-c255e58e8c64&assignmentId=8038706a-d8e9-40b2-9cb1-9293a20190b9&submissionId=cee6d9f2-fc96-513a-1a38-16f6d33ec50d#redes"
+              target="_blank" rel="noopener noreferrer">Saiba mais</a>
+          </div>
+        </article>
+
+        <article class="expo-card" tabindex="0" role="link" data-link="https://jucdreis.github.io/disney-musicas"
+          data-target="_blank">
+          <img src="./assets/musica.png" alt="Qual é a Música?">
+          <div>
+            <h4>Qual é a Música?</h4>
+            <p>Projeto interativo que desafia os participantes a identificarem músicas.</p>
+            <a href="https://jucdreis.github.io/disney-musicas" target="_blank" rel="noopener noreferrer">Saiba
+              mais</a>
+          </div>  
+        </article>
+
+        <article class="expo-card" tabindex="0" role="link"
+          data-link="https://mlkhilo.github.io/hilo-cards/?fbclid=PAb21jcANKjh5leHRuA2FlbQIxMQABp8DnzI17LA4Y5rGiJSauopifNelmCSI-J9bEIezSnBdZ3Pnug-jXf_3ZiVDr_aem_lIrI5MazvrlS27ycsbkk_Q"
+          data-target="_blank">
+          <img src="./assets/hilocards.jpg" alt="Hilo Cards">
+          <div>
+            <h4>Hilo Cards</h4>
+            <p>Jogo de cartas estratégico com cartas de efeito e custo de energia.</p>
+            <a href="https://mlkhilo.github.io/hilo-cards/?fbclid=PAb21jcANKjh5leHRuA2FlbQIxMQABp8DnzI17LA4Y5rGiJSauopifNelmCSI-J9bEIezSnBdZ3Pnug-jXf_3ZiVDr_aem_lIrI5MazvrlS27ycsbkk_Q"
+              target="_blank" rel="noopener noreferrer">Saiba mais</a>
+          </div>
+        </article>
+
+        <article class="expo-card" tabindex="0" role="link"
+          data-link="https://matzhen.github.io/Projeto-FETEC/?classId=15c5af82-c6ca-48ee-960f-2c20cecbab59&assignmentId=dd9af1f4-26f9-4c8d-9b86-26625dc99a76&submissionId=8b2b52d0-3d57-bcb6-9c7d-f60b9ded146a"
+          data-target="_blank">
+          <img src="./assets/Temperamentando.jpg" alt="Teste de Temperamento">
+          <div>
+            <h4>Teste de Temperamento</h4>
+            <p>Uma ferramenta para descobrir o temperamento pessoal com base em respostas simples.</p>
+            <a href="https://matzhen.github.io/Projeto-FETEC/?classId=15c5af82-c6ca-48ee-960f-2c20cecbab59&assignmentId=dd9af1f4-26f9-4c8d-9b86-26625dc99a76&submissionId=8b2b52d0-3d57-bcb6-9c7d-f60b9ded146a"
+              target="_blank" rel="noopener noreferrer">Saiba mais</a>
+          </div>
+        </article>
+
+        <article class="expo-card" tabindex="0" role="link" data-link="https://livcarsu.github.io/VocacaoPolar/"
+          data-target="_blank">
+          <img src="./assets/vocacional.png" alt="Teste Vocacional">
+          <div>
+            <h4>Teste Vocacional</h4>
+            <p>Descubra sua área de atuação com base em suas preferências.</p>
+            <a href="https://livcarsu.github.io/VocacaoPolar/" target="_blank" rel="noopener noreferrer">Saiba mais</a>
+          </div>
+        </article>
+
+        <article class="expo-card" tabindex="0" role="link" data-link="https://fetecdarcy.github.io/roboticadje"
+          data-target="_blank">
+          <img src="./assets/robotica.jpg" alt="Robótica">
+          <div>
+            <h4>Robótica</h4>
+            <p>Projeto de robótica com programação e construção de protótipos.</p>
+            <a href="https://fetecdarcy.github.io/roboticadje" target="_blank" rel="noopener noreferrer">Saiba
+              mais</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contato">
+    <div class="footer-container">
+      <div class="footer-text-group">
+        <span>&copy; 2026</span>
+        <img src="assets/infotec.svg" alt="logo Infotec" class="logoM">
+        <span> &mdash; Todos os direitos reservados. <span class="credit">@abnerssk</span></span>
+      </div>
+      
+      <div class="social-icons">
+        <a href="https://www.facebook.com/etec.darcy.pereira.de.moraes.2025" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/etecdarcypereira?igsh=MWdubDEwOGNnMWJpcw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://github.com/fetecdarcy" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Configuração de Menu Mobile e Tema (Claro/Escuro)
+      const menuToggle = document.querySelector('#menu-toggle');
+      const navMenu = document.querySelector('nav ul');
+      const themeToggle = document.querySelector('#theme-toggle');
+      const themeIcon = document.querySelector('#theme-toggle i');
+
+      menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('show');
+      });
+
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
+
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        const isLightMode = document.body.classList.contains('light-mode');
+
+        if (isLightMode) {
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
+          localStorage.setItem('theme', 'light');
+        } else {
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+          localStorage.setItem('theme', 'dark');
+        }
+      });
+
+      const slides = [
+        {
+          title: 'Scratch',
+          description: 'Jogos diversos desenvolvidos no Scratch.',
+          image: './assets/scratch.jpg',
+          link: 'https://tavernf.github.io/scratchFetec/?classId=c6af9f25-f24a-40c1-a965-c255e58e8c64&assignmentId=8038706a-d8e9-40b2-9cb1-9293a20190b9&submissionId=cee6d9f2-fc96-513a-1a38-16f6d33ec50d#redes',
+          thumbs: ['./assets/exposicoes/scratch1.png', './assets/exposicoes/scratch2.png', './assets/exposicoes/scratch3.png', './assets/exposicoes/scratch4.png'],
+          tagText: 'Projeto em destaque',
+          tagIcon: 'fa-star',
+          previewLeft: './assets/robotica.jpg',
+          previewRight: './assets/musica.png'
+        },
+        {
+          title: 'Qual é a Música?',
+          description: 'Projeto interativo que desafia os participantes a identificarem músicas.',
+          image: './assets/musica.png',
+          link: 'https://jucdreis.github.io/disney-musicas',
+          thumbs: ['./assets/exposicoes/musica1.png', './assets/exposicoes/musica2.png', './assets/exposicoes/musica3.png', './assets/exposicoes/musica4.png'],
+          tagText: 'Feitos pelos alunos',
+          tagIcon: 'fa-users',
+          previewLeft: './assets/scratch.jpg',
+          previewRight: './assets/hilocards.jpg'
+        },
+        {
+          title: 'Hilo Cards',
+          description: 'Jogo de cartas estratégico com cartas de efeito e custo de energia.',
+          image: './assets/hilocards.jpg',
+          link: 'https://mlkhilo.github.io/hilo-cards/?fbclid=PAb21jcANKjh5leHRuA2FlbQIxMQABp8DnzI17LA4Y5rGiJSauopifNelmCSI-J9bEIezSnBdZ3Pnug-jXf_3ZiVDr_aem_lIrI5MazvrlS27ycsbkk_Q',
+          thumbs: ['./assets/exposicoes/hilocards1.png', './assets/exposicoes/hilocards2.png', './assets/exposicoes/hilocards3.png', './assets/exposicoes/hilocards4.png'],
+          tagText: 'Feitos pelos alunos',
+          tagIcon: 'fa-users',
+          previewLeft: './assets/musica.png',
+          previewRight: './assets/Temperamentando.jpg'
+        },
+        {
+          title: 'Teste de Temperamento',
+          description: 'Uma ferramenta para descobrir o temperamento pessoal com base em respostas simples.',
+          image: './assets/Temperamentando.jpg',
+          link: 'https://matzhen.github.io/Projeto-FETEC/?classId=15c5af82-c6ca-48ee-960f-2c20cecbab59&assignmentId=dd9af1f4-26f9-4c8d-9b86-26625dc99a76&submissionId=8b2b52d0-3d57-bcb6-9c7d-f60b9ded146a',
+          thumbs: ['./assets/exposicoes/temperamentando1.png', './assets/exposicoes/temperamentando2.png', './assets/exposicoes/temperamentando3.png', './assets/exposicoes/temperamentando4.png'],
+          tagText: 'Feitos pelos alunos',
+          tagIcon: 'fa-users',
+          previewLeft: './assets/hilocards.jpg',
+          previewRight: './assets/vocacional.jpg'
+        },
+        {
+          title: 'Teste Vocacional',
+          description: 'Descubra sua área de atuação com base em suas preferências.',
+          image: './assets/vocacional.png',
+          link: 'https://livcarsu.github.io/VocacaoPolar/',
+          thumbs: ['./assets/exposicoes/vocacional1.png', './assets/exposicoes/vocacional2.png', './assets/exposicoes/vocacional3.png', './assets/exposicoes/vocacional4.png'],
+          tagText: 'Feitos pelos alunos',
+          tagIcon: 'fa-users',
+          previewLeft: './assets/Temperamentando.jpg',
+          previewRight: './assets/robotica.jpg'
+        },
+        {
+          title: 'Robótica',
+          description: 'Projeto de robótica com programação e construção de protótipos.',
+          image: './assets/robotica.jpg',
+          link: 'https://fetecdarcy.github.io/roboticadje',
+          thumbs: ['./assets/exposicoes/robotica1.png', './assets/exposicoes/robotica2.png', './assets/exposicoes/robotica3.png', './assets/exposicoes/robotica4.png'],
+          tagText: 'Feitos pelos alunos',
+          tagIcon: 'fa-users',
+          previewLeft: './assets/vocacional.jpg',
+          previewRight: './assets/scratch.jpg'
+        }
+      ];
+
+      const expoTitle = document.querySelector('#expoTitle');
+      const expoDescription = document.querySelector('#expoDescription');
+      const expoMainImage = document.querySelector('#expoMainImage');
+      const expoLink = document.querySelector('#expoLink');
+      const expoThumbs = document.querySelector('#expoThumbs');
+      const expoTagText = document.querySelector('#expoTagText');
+      const expoTagIcon = document.querySelector('#expoTagIcon');
+      const expoPanel = document.querySelector('.expo-panel');
+      const expoDots = document.querySelector('#expoDots');
+      const expoPreviewLeft = document.querySelector('#expoPreviewLeft img');
+      const expoPreviewRight = document.querySelector('#expoPreviewRight img');
+      const expoPrev = document.querySelector('#expoPrev');
+      const expoNext = document.querySelector('#expoNext');
+      const expoCards = document.querySelectorAll('.expo-card');
+      const expoFeature = document.querySelector('.expo-feature');
+      const expoFeatureBlock = document.querySelector('#expoFeatureBlock');
+
+      let currentIndex = 0;
+      let autoPlayId = null;
+      let isHovering = false;
+
+      // Lógica aprimorada para transição de slides e animação
+      function goToSlide(index) {
+        let direction = 'next';
+        const targetIndex = (index + slides.length) % slides.length;
+        
+        if (targetIndex === currentIndex) return; // Nenhuma mudança
+
+        // Detectar direção para a animação
+        if (targetIndex > currentIndex) {
+          direction = 'next';
+        } else {
+          direction = 'prev';
+        }
+
+        // Lidar com o pulo do último para o primeiro e vice-versa
+        if (currentIndex === slides.length - 1 && targetIndex === 0) direction = 'next';
+        if (currentIndex === 0 && targetIndex === slides.length - 1) direction = 'prev';
+
+        currentIndex = targetIndex;
+
+        // Resetar e aplicar animação de Fade e Deslizar no Card
+        expoFeatureBlock.classList.remove('slide-in-next', 'slide-in-prev');
+        void expoFeatureBlock.offsetWidth; // Força um "reflow" para resetar a animação
+        expoFeatureBlock.classList.add(direction === 'next' ? 'slide-in-next' : 'slide-in-prev');
+
+        // Aplicar fade rápido na Imagem principal
+        expoMainImage.classList.remove('fade-img');
+        void expoMainImage.offsetWidth;
+        expoMainImage.classList.add('fade-img');
+
+        updateCarousel();
+        renderDots();
+        
+        // Mantem/Reseta o autoplay se o mouse não estiver no carrossel
+        if (!isHovering) {
+          restartAutoPlay();
+        } else {
+          clearInterval(autoPlayId);
+        }
+      }
+
+      function renderDots() {
+        expoDots.innerHTML = '';
+        slides.forEach((_, index) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = `expo-dot ${index === currentIndex ? 'active' : ''}`;
+          dot.setAttribute('aria-label', `Ir para exposição ${index + 1}`);
+          dot.addEventListener('click', () => goToSlide(index));
+          expoDots.appendChild(dot);
+        });
+      }
+
+      function updateCarousel() {
+        const slide = slides[currentIndex];
+        const prevSlide = slides[(currentIndex - 1 + slides.length) % slides.length];
+        const nextSlide = slides[(currentIndex + 1) % slides.length];
+
+        expoTitle.textContent = slide.title;
+        expoDescription.textContent = slide.description;
+        expoMainImage.src = slide.image;
+        expoMainImage.alt = slide.title;
+        expoLink.href = slide.link;
+        expoTagText.textContent = slide.tagText;
+        expoTagIcon.className = `fas ${slide.tagIcon}`;
+        expoPanel.classList.toggle('expo-panel--compact', slide.title === 'Teste de Temperamento');
+        expoPreviewLeft.src = prevSlide.image;
+        expoPreviewRight.src = nextSlide.image;
+
+        expoThumbs.innerHTML = '';
+        slide.thumbs.forEach((thumb, index) => {
+          const img = document.createElement('img');
+          img.src = thumb;
+          img.alt = `${slide.title} - prévia ${index + 1}`;
+          expoThumbs.appendChild(img);
+        });
+
+        document.querySelectorAll('.expo-dot').forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+      }
+
+      function goNext() {
+        goToSlide(currentIndex + 1);
+      }
+
+      function goPrev() {
+        goToSlide(currentIndex - 1);
+      }
+
+      function startAutoPlay() {
+        autoPlayId = setInterval(goNext, 5000); // 5 Segundos
+      }
+
+      function restartAutoPlay() {
+        clearInterval(autoPlayId);
+        startAutoPlay();
+      }
+
+      function resetMainImageToCurrentSlide() {
+        expoMainImage.src = slides[currentIndex].image;
+        expoMainImage.alt = slides[currentIndex].title;
+      }
+
+      // Adicionando evento de Hover rápido nas miniaturas (com fade)
+      expoThumbs.addEventListener('mouseover', (event) => {
+        const thumb = event.target.closest('img');
+        if (!thumb) return;
+        
+        // Impede que a animação rode se for a exata mesma foto que já está lá
+        if (!expoMainImage.src.includes(thumb.getAttribute('src').replace('./', ''))) {
+          expoMainImage.classList.remove('fade-img');
+          void expoMainImage.offsetWidth;
+          expoMainImage.classList.add('fade-img');
+          
+          expoMainImage.src = thumb.src;
+          expoMainImage.alt = `${slides[currentIndex].title} - prévia`;
+        }
+      });
+
+      expoThumbs.addEventListener('mouseleave', () => {
+        // Toca animação de volta para a principal se a imagem mudou
+        if (!expoMainImage.src.includes(slides[currentIndex].image.replace('./', ''))) {
+          expoMainImage.classList.remove('fade-img');
+          void expoMainImage.offsetWidth;
+          expoMainImage.classList.add('fade-img');
+          
+          resetMainImageToCurrentSlide();
+        }
+      });
+
+      expoFeature.addEventListener('click', (event) => {
+        if (event.target.closest('#expoLink')) return;
+
+        const currentSlide = slides[currentIndex];
+        if (currentSlide && currentSlide.link) {
+          window.open(currentSlide.link, '_blank', 'noopener,noreferrer');
+        }
+      });
+
+      const carouselContainer = document.getElementById('expoCarousel');
+
+      carouselContainer.addEventListener('mouseenter', () => {
+        isHovering = true;
+        clearInterval(autoPlayId);
+      });
+
+      carouselContainer.addEventListener('mouseleave', () => {
+        isHovering = false;
+        restartAutoPlay();
+      });
+
+      expoNext.addEventListener('click', () => goNext());
+      expoPrev.addEventListener('click', () => goPrev());
+
+      document.getElementById('expoPreviewLeft').addEventListener('click', () => goPrev());
+      document.getElementById('expoPreviewRight').addEventListener('click', () => goNext());
+
+      expoCards.forEach((card) => {
+        const link = card.dataset.link;
+        const target = card.dataset.target || '_self';
+
+        card.addEventListener('click', (event) => {
+          const clickedAnchor = event.target.closest('a');
+          if (clickedAnchor) return;
+          window.open(link, target);
+        });
+
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            window.open(link, target);
+          }
+        });
+
+        card.addEventListener('mouseenter', () => {
+          card.style.cursor = 'pointer';
+        });
+      });
+
+      // Inicia tudo no carregamento
+      renderDots();
+      updateCarousel();
+      startAutoPlay();
+    });
+  </script>
+</body>
+
+</html>
