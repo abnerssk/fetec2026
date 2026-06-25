@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>INFOTEC - Informática para Internet</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="shortcut icon" href="assets/infologo.svg" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/FETEC_LOGO.svg" type="image/x-icon">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 
@@ -15,7 +15,7 @@
       --ultrablack: #000000;
       --black: #111111;
       --bg: #0f0f0f;
-      --bg-2: #122235;
+      --bg-2: #1b1b1b;
       --surface: #1a2633;
       --surface-2: #18344a;
       --surface-3: #162a3c;
@@ -24,7 +24,7 @@
       --muted: rgba(255, 255, 255, 0.65);
       --border: rgba(255, 255, 255, 0.08);
       --border-strong: rgba(255, 255, 255, 0.14);
-      --accent: #00ff73;
+      --accent: #8B00FF;
       --accent-2: #8fd1ff;
       --header: #050505;
       --header-dark: #000000;
@@ -33,15 +33,15 @@
       --card-bg-hover: rgba(255, 255, 255, 0.045);
       --shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
       
-      /* Gradientes e Overlays */
-      --overlay-1: rgba(0, 0, 0, 0.65);
-      --overlay-2: rgba(0, 0, 0, 0.85);
+      /* Gradientes e Overlays - Valores ajustados para clarear o dragão no modo Dark */
+      --overlay-1: rgba(0, 0, 0, 0.30);
+      --overlay-2: rgba(0, 0, 0, 0.50);
       --panel-bg-1: rgba(22, 42, 60, 0.98);
       --panel-bg-2: rgba(19, 34, 48, 0.98);
       --preview-overlay-1: rgba(3, 9, 15, 0.08);
       --preview-overlay-2: rgba(3, 9, 15, 0.45);
       
-      --title-glow: 0 0 20px rgba(0, 255, 115, 0.4);
+      --title-glow: 0 0 20px rgba(139, 0, 255, 0.4);
       
       /* Cores do Bloco de Código */
       --code-text: #d4d4d4;
@@ -64,7 +64,7 @@
       --muted: rgba(15, 23, 42, 0.85);
       --border: rgba(15, 23, 42, 0.15);
       --border-strong: rgba(15, 23, 42, 0.3);
-      --accent: #00ba52; 
+      --accent: #7000CC; 
       --accent-2: #0284c7;
       --header: #ffffff;
       --header-dark: #f1f5f9;
@@ -241,7 +241,7 @@
         linear-gradient(to bottom, transparent 75%, var(--black) 100%),
         linear-gradient(var(--overlay-1), var(--overlay-2)), 
         url('assets/dragon.png'),
-        url('https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUybWx6Z3lqOXo1aXM3OWx3YnhvcDRncGFobDNzN2Njamd2NDh4eTR5YiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/xULW8l2gXuRPmsQe8U/source.gif'), 
+        url('assets/matrix-background.gif'), 
         linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
       background-position: 80% bottom, center, 90% center, center, center;
       background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
@@ -258,17 +258,15 @@
 
     /* Overrides do Modo Claro para a Seção Fetec */
     body.light-mode .section-fetec {
-      /* Adicionada uma terceira camada linear-gradient escurecida (0.18) acima do dragão */
       background-image: 
         linear-gradient(to bottom, transparent 75%, var(--black) 100%),
         linear-gradient(var(--overlay-1), var(--overlay-2)), 
-        linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)), 
         url('assets/dragon.png'),
-        url('https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUybWx6Z3lqOXo1aXM3OWx3YnhvcDRncGFobDNzN2Njamd2NDh4eTR5YiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/xULW8l2gXuRPmsQe8U/source.gif'), 
+        url('assets/matrix-background.gif'), 
         linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
-      background-position: 80% bottom, center, center, 90% center, center, center;
-      background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-      background-size: 100% 100%, cover, cover, contain, cover, cover; 
+      background-position: 80% bottom, center, 90% center, center, center;
+      background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+      background-size: 100% 100%, cover, contain, cover, cover;
     }
 
     .fetec-wrapper {
@@ -300,12 +298,15 @@
     }
 
     .fetec-subtitle {
-      color: var(--accent);
+      /* Corrigido: Roxo mais claro e vibrante para excelente contraste no modo escuro */
+      color: #eec9ff; 
       font-size: 1.15rem;
-      font-weight: 600; /* Aumentado para melhor legibilidade */
+      font-weight: 700; 
       margin-bottom: 2rem;
       text-align: left;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.7); /* Adicionado sombra */
+      /* Corrigido: Sombra mais forte com leve brilho para desgrudar do fundo */
+      text-shadow: 0 2px 5px rgba(0,0,0,0.9), 0 0 12px rgba(139, 0, 255, 0.4); 
+      letter-spacing: 0.3px;
     }
 
     .section-fetec .container p {
@@ -321,7 +322,7 @@
 
     /* Cores Específicas do Modo Claro para Textos */
     body.light-mode .fetec-subtitle {
-      color: #007a33; /* Verde mais escuro para contraste */
+      color: #5800AA; /* Roxo mais escuro para contraste */
       font-weight: 700;
       text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
     }
@@ -338,7 +339,7 @@
       align-items: center;
       justify-content: center;
       background-color: var(--accent);
-      color: #000;
+      color: #ffffff;
       text-decoration: none;
       font-family: "Chakra Petch", sans-serif;
       font-weight: 700;
@@ -353,7 +354,7 @@
     }
 
     .section-fetec .container a.btn:hover {
-      background-color: #00e668; 
+      background-color: #A040FF; 
       transform: translateY(-2px);
     }
 
@@ -661,7 +662,7 @@
       width: 100%; 
       padding: 0.9rem 1.6rem;
       background: var(--accent);
-      color: #000000; 
+      color: #ffffff; 
       text-decoration: none;
       font-family: "Chakra Petch", sans-serif;
       font-weight: 700;
@@ -672,7 +673,7 @@
     }
     
     .expo-btn:hover {
-      background-color: #00e668;
+      background-color: #A040FF;
       transform: translateY(-2px);
     }
 
@@ -696,7 +697,7 @@
     }
 
     .expo-arrow:hover {
-      background: rgba(0, 255, 115, 0.2);
+      background: rgba(139, 0, 255, 0.2);
       transform: translateY(-50%) scale(1.05);
     }
 
