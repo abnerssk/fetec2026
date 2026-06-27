@@ -276,6 +276,26 @@
         transform: scale(1.1);
       }
 
+      /* Animação de troca de tema — restrita ao botão, não afeta o resto do site */
+      @keyframes theme-toggle-flip {
+        0% {
+          transform: scale(1) rotate(0deg);
+        }
+        40% {
+          transform: scale(0.7) rotate(160deg);
+        }
+        70% {
+          transform: scale(1.25) rotate(225deg);
+        }
+        100% {
+          transform: scale(1) rotate(360deg);
+        }
+      }
+
+      #theme-toggle.theme-toggle--anim i {
+        animation: theme-toggle-flip 0.55s var(--ease-fluid, ease);
+      }
+
       .header-actions {
         display: flex;
         align-items: center;
@@ -439,33 +459,14 @@
         border-color: var(--border-strong);
       }
 
-      /* BOTAO CORRIGIDO PARA RESPONSIVIDADE */
-      .section-fetec .container a.btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--btn-dark-bg);
-        border: 1px solid var(--btn-dark-border);
-        color: var(--btn-dark-color);
-        text-decoration: none;
-        font-family: "Chakra Petch", sans-serif;
-        font-weight: 700;
-        font-size: 1.1rem;
-        padding: 0.8rem 2.2rem;
-        margin-top: 1rem;
-        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
-        box-shadow: 0 0 18px rgba(0, 255, 65, 0.18), inset 0 1px 0 rgba(255,255,255,0.08);
-        transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
+      /* Hover no trecho "Informática para Internet" do texto de introdução */
+      .curso-highlight {
+        transition: color 0.3s ease, text-shadow 0.3s ease;
       }
 
-      .section-fetec .container a.btn:hover {
-        background: var(--btn-dark-hover-bg);
-        border-color: var(--btn-dark-hover-border);
-        box-shadow: 0 0 28px rgba(0, 255, 65, 0.35), inset 0 1px 0 rgba(255,255,255,0.12);
-        transform: translateY(-2px);
+      .curso-highlight:hover {
+        color: var(--accent);
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.45);
       }
 
       /* ===== SEÇÃO CURSO (ESTILO CÓDIGO) ===== */
@@ -592,54 +593,21 @@
         box-shadow: 0 0 0 1px var(--glass-border-accent), var(--glass-inset);
       }
 
-      /* Grid do Carrossel e Posição das Setas */
+      /* Flex layout atualizado para Seta + Card + Seta */
       .expo-carousel {
-        max-width: 1300px;
+        max-width: 1280px;
         margin: 0 auto;
         position: relative;
-        display: grid;
-        grid-template-columns: 80px minmax(0, 1fr) 80px;
+        display: flex;
         align-items: center; 
-        gap: 1.5rem;
-        padding: 20px 75px 5px; 
+        gap: 2rem;
+        padding: 20px 0 5px; 
         contain: layout style;
-      }
-
-      /* Preview Lateral (Imagens Menores) */
-      .expo-preview {
-        position: relative;
-        overflow: hidden;
-        border-radius: 16px;
-        height: 280px; 
-        background: var(--preview-dark);
-        border: 1px solid var(--glass-border);
-        box-shadow: var(--glass-shadow);
-        opacity: 0.88;
-        cursor: pointer;
-        transition: transform .25s var(--ease-fluid), opacity .25s ease;
-      }
-
-      .expo-preview:hover {
-        transform: scale(1.02);
-        opacity: 1;
-        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--glass-border-accent);
-      }
-
-      .expo-preview img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: saturate(0.78) brightness(0.7);
-      }
-
-      .expo-preview .expo-preview-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, var(--preview-overlay-1), var(--preview-overlay-2));
       }
 
       /* Card Principal em Destaque */
       .expo-feature {
+        flex: 1; /* Ocupa todo o espaço restante do flex */
         display: grid;
         grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr);
         border-radius: 18px;
@@ -649,14 +617,12 @@
         border: 1px solid var(--glass-border);
         cursor: pointer;
         transition: transform 0.3s var(--ease-fluid), box-shadow 0.3s ease, border-color 0.3s ease;
-        transition: all 0.1s ease-in-out;
       }
 
       .expo-feature:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 28px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--glass-border-accent), var(--glass-inset);
-        border-color: var(--glass-border-accent);
-        scale: 1.01;
+      transform: translateY(-4px) scale(1.01); 
+      border-color: var(--glass-border-accent); 
+      box-shadow: 0 0 20px rgba(0, 200, 50, 0.20), var(--glass-inset);
       }
       
       /* ANIMAÇÕES DO CARROSSEL (Slide e Fade) */
@@ -683,17 +649,15 @@
         animation: fadeImg 0.3s ease-in-out forwards;
       }
 
-      /* MODIFICADO: Aplicado o aspect-ratio e overflow hidden fixos */
       .expo-media {
         position: relative;
         background: #000;
         overflow: hidden;
         width: 100%;
         height: 100%; 
-        aspect-ratio: 16 / 9; /* Garante que independente do tamanho original a área sempre se comporte como 1920x1080 (16:9) */
+        aspect-ratio: 16 / 9;
       }
 
-      /* MODIFICADO: A imagem agora é absolute para não afetar o tamanho do container caso a resolução original fuja do 16:9 */
       .expo-media img {
         position: absolute;
         top: 0;
@@ -733,7 +697,6 @@
         margin-top: 0;
       }
 
-      /* MODIFICADO: Adicionado 'margin: auto 0' para a badge ficar exatamente centralizada no espaço vertical */
       .expo-tag {
         display: inline-flex;
         align-items: center;
@@ -742,7 +705,7 @@
         padding: 0.35rem 0.8rem;
         border-radius: 999px;
         font-size: 0.85rem;
-        margin: auto 0; /* Centraliza entre as thumbs e o btn */
+        margin: auto 0; 
         transition: background 0.3s ease, color 0.3s ease;
         border: none;
       }
@@ -762,7 +725,6 @@
         color: #7dd3fc;
       }
 
-      /* Tag overrides for light mode */
       body.light-mode .tag-default {
         background: rgba(15, 23, 42, 0.10);
         color: #334155;
@@ -818,15 +780,16 @@
         opacity: 1;
       }
 
-      /* MODIFICADO: Retirada a margin-top do botão, deixando o "margin: auto 0" da tag organizar o meio */
       .expo-btn {
+        position: relative;
+        isolation: isolate;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%; 
         padding: 0.8rem 2.2rem;
-        background: var(--btn-dark-bg);
-        border: 1px solid var(--btn-dark-border);
+        background: var(--btn-dark-border);
+        border: none;
         color: var(--btn-dark-color);
         text-decoration: none;
         font-family: "Chakra Petch", sans-serif;
@@ -834,56 +797,69 @@
         font-size: 1.1rem;
         clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
         box-shadow: 0 0 18px rgba(0, 255, 65, 0.18), inset 0 1px 0 rgba(255,255,255,0.08);
-        transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+        transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
         margin-top: 0;
+      }
+
+      .expo-btn::before {
+        content: '';
+        position: absolute;
+        inset: 1px;
+        background: var(--btn-dark-bg);
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+        z-index: -1;
+        transition: background 0.3s ease;
       }
       
       .expo-btn:hover {
-        background: var(--btn-dark-hover-bg);
-        border-color: var(--btn-dark-hover-border);
+        background: var(--btn-dark-hover-border);
         box-shadow: 0 0 28px rgba(0, 255, 65, 0.35), inset 0 1px 0 rgba(255,255,255,0.12);
         transform: translateY(-2px);
       }
 
-      /* Posição e Setas Totalmente de Fora */
+      .expo-btn:hover::before {
+        background: var(--btn-dark-hover-bg);
+      }
+
       .expo-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 4;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        background: var(--arrow-dark);
-        border: 1px solid var(--glass-border);
-        box-shadow: var(--glass-shadow), var(--glass-inset);
-        color: var(--text);
-        font-size: 1.1rem;
-        cursor: pointer;
-        transition: transform .25s var(--ease-fluid), background .2s ease, border-color .2s ease, box-shadow .2s ease;
-        will-change: transform;
+          position: relative;
+          flex-shrink: 0;
+          z-index: 4;
+
+          width: 50px;     
+          height: 320px;    
+
+          border-radius: 12px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          background: var(--panel-dark);
+          border: 1px solid var(--glass-border);
+          box-shadow: var(--glass-shadow), var(--glass-inset);
+
+          color: var(--text);
+          font-size: 1.2rem;
+          cursor: pointer;
+
+          transition:
+              transform .25s var(--ease-fluid),
+              background .2s ease,
+              border-color .2s ease,
+              box-shadow .2s ease;
       }
 
       .expo-arrow:hover {
         background: rgba(0, 200, 50, 0.25);
         border-color: var(--glass-border-accent);
         box-shadow: 0 0 20px rgba(0, 200, 50, 0.20), var(--glass-inset);
-        transform: translateY(-50%) scale(1.08);
-      }
-
-      .expo-prev {
-        left: 10px;
-      }
-
-      .expo-next {
-        right: 10px;
+        transform: scale(1.08);
       }
 
       .expo-dots {
           max-width: 1280px;
-          margin: 1.2rem auto 0; /* aumenta a distância do carrossel */
+          margin: 1.2rem auto 0;
           display: flex;
           justify-content: center;
           gap: 0.5rem;
@@ -1074,8 +1050,7 @@
       /* Ajuste de Navegação e Responsividade */
       @media (max-width: 1180px) {
         .expo-carousel {
-          grid-template-columns: 70px minmax(0, 1fr) 70px;
-          padding: 20px 65px 5px;
+          padding: 20px 20px 5px;
         }
 
         .expo-lista {
@@ -1090,22 +1065,16 @@
         }
 
         .expo-carousel {
-          grid-template-columns: 1fr;
           padding: 5px 0; 
         }
 
         .expo-prev,
-        .expo-next,
-        .expo-preview {
+        .expo-next {
           display: none;
         }
 
         .expo-feature {
           grid-template-columns: 1fr;
-        }
-
-        .expo-media {
-          /* No mobile, já está fixo o aspect ratio de 16:9 de forma global agora */
         }
 
         .expo-lista {
@@ -1253,6 +1222,219 @@
           font-size: 1.2rem;
         }
       }
+
+      /* css correto dos btn */
+      .section-fetec .container a.btn,
+      .expo-btn {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+
+          width: 100%;
+          padding: .85rem 2.2rem;
+
+          background: rgba(255,255,255,.04);
+          color: var(--text);
+
+          text-decoration: none;
+          font-family: "Chakra Petch", sans-serif;
+          font-size: 1.08rem;
+          font-weight: 700;
+
+
+          clip-path: polygon(
+              0 0,
+              100% 0,
+              100% calc(100% - 15px),
+              calc(100% - 15px) 100%,
+              0 100%
+          );
+
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+
+          box-shadow:
+              inset 0 1px 0 rgba(255,255,255,.08),
+              0 8px 22px rgba(0,0,0,.25);
+
+          transition:
+              transform .35s cubic-bezier(.2,.8,.2,1),
+              box-shadow .35s ease,
+              border-color .35s ease,
+              background .35s ease,
+              color .35s ease;
+      }
+
+      .section-fetec .container a.btn::before,
+      .expo-btn::before {
+          content: "";
+          position: absolute;
+          inset: 1px;
+          z-index: -2;
+
+          background: rgba(255,255,255,.03);
+
+          clip-path: polygon(
+              0 0,
+              100% 0,
+              100% calc(100% - 14px),
+              calc(100% - 14px) 100%,
+              0 100%
+          );
+      }
+
+      .section-fetec .container a.btn::after,
+      .expo-btn::after {
+          content: "";
+          position: absolute;
+
+          top: 0;
+          left: -120%;
+
+          width: 60%;
+          height: 100%;
+
+          background: linear-gradient(
+              110deg,
+              transparent,
+              rgba(255,255,255,.18),
+              transparent
+          );
+
+          transform: skewX(-25deg);
+
+          transition: left .7s cubic-bezier(.22,1,.36,1);
+      }
+
+      /* Hover */
+
+      .section-fetec .container a.btn:hover,
+      .expo-btn:hover {
+
+          transform: translateY(-4px);
+
+          background: rgba(255,255,255,.08);
+
+          border-color: rgba(255,255,255,.28);
+
+          color: #fff;
+
+          box-shadow:
+              inset 0 1px 0 rgba(255,255,255,.15),
+              0 15px 35px rgba(0,0,0,.35);
+      }
+
+      .section-fetec .container a.btn:hover::before,
+      .expo-btn:hover::before{
+          background: rgba(255,255,255,.05);
+      }
+
+      .section-fetec .container a.btn:hover::after,
+      .expo-btn:hover::after{
+          left: 170%;
+      }
+
+      /* Clique */
+
+      .section-fetec .container a.btn:active,
+      .expo-btn:active{
+          transform: translateY(-1px) scale(.98);
+      }
+
+      /* CSS DA PARTE DO <Informática para Internet/> */
+      .curso-container{
+          transition:
+              transform .45s cubic-bezier(.2,.8,.2,1),
+              box-shadow .45s ease,
+              border-color .45s ease,
+              background .45s ease;
+      }
+
+      .curso-container:hover{
+          transform: translateY(-6px);
+
+          box-shadow:
+              0 18px 45px rgba(0,0,0,.35),
+              inset 0 1px 0 rgba(255,255,255,.08);
+
+          border-color: rgba(255,255,255,.18);
+      }
+
+      /* Título */
+
+      .section-curso h1{
+          transition:
+              color .35s ease,
+              transform .35s ease,
+              text-shadow .35s ease;
+      }
+
+      .curso-container:hover h1{
+          transform: translateX(6px);
+
+          text-shadow: 0 0 18px rgba(0,255,65,.18);
+      }
+
+      /* Texto */
+
+      .code-line,
+      .normal-text{
+          transition: color .3s ease;
+      }
+
+      .curso-container:hover .normal-text{
+          color: var(--text-dim);
+      }
+
+      /* Vídeo */
+
+      .video-frame iframe{
+          transition:
+              transform .45s cubic-bezier(.2,.8,.2,1),
+              box-shadow .45s ease,
+              border-color .45s ease;
+      }
+
+      .curso-container:hover .video-frame iframe{
+          transform: scale(1.02);
+
+          border-color: rgba(255,255,255,.22);
+
+          box-shadow:
+              0 18px 40px rgba(0,0,0,.35);
+      }
+
+      /* ===== Animações de entrada do texto (ao abrir a página e ao rolar) ===== */
+      .reveal,
+      .reveal-left,
+      .reveal-right {
+        opacity: 0;
+        transition: opacity 0.8s var(--ease-fluid), transform 0.8s var(--ease-fluid);
+        transition-delay: calc(var(--reveal-i, 0) * 80ms);
+      }
+
+      .reveal       { transform: translateY(28px); }
+      .reveal-left  { transform: translateX(-36px); }
+      .reveal-right { transform: translateX(36px); }
+
+      .reveal.in-view,
+      .reveal-left.in-view,
+      .reveal-right.in-view {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal, .reveal-left, .reveal-right {
+          transition: none;
+          opacity: 1;
+          transform: none;
+        }
+      }
     </style>
   </head>
 
@@ -1273,7 +1455,7 @@
 
       <div class="header-actions">
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Alternar tema">
-          <i class="fas fa-sun"></i>
+          <i class="fas fa-moon"></i>
         </button>
         <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Abrir menu">
           <i class="fas fa-bars"></i>
@@ -1285,14 +1467,14 @@
       <section id="fetec" class="section-fetec">
         <div class="fetec-wrapper">
           <div class="container">
-            <h1 class="fetec-title">FETEC 2026</h1>
-            <h2 class="fetec-subtitle">Exposição Virtual dos Projetos do Curso Informática para Internet</h2>
-            <p>A FETEC é um evento promovido pela Etec Darcy Pereira de Moraes (Itapetininga - SP) e conta com a
+            <h1 class="fetec-title reveal">FETEC 2026</h1>
+            <h2 class="fetec-subtitle reveal">Exposição Virtual dos Projetos do Curso Informática para Internet</h2>
+            <p class="reveal">A FETEC é um evento promovido pela Etec Darcy Pereira de Moraes (Itapetininga - SP) e conta com a
               participação de professores e alunos para exposição de projetos, experimentos e apresentações.</p>
-            <p>Este site foi desenvolvido pelos alunos do 1º, 2º e 3º ano do curso Ensino Médio Integrado ao Técnico em <i>Informática
+            <p class="reveal">Este site foi desenvolvido pelos alunos do 1º, 2º e 3º ano do curso Ensino Médio Integrado ao Técnico em <i class="curso-highlight">Informática
                 para Internet</i>, proporcionando ao público uma exposição virtual dos projetos e jogos
               desenvolvidos ao longo do ano.</p>
-            <a href="https://fetecdarcy.github.io/landingpage-fetec2025/" class="btn" target="_blank">Saiba Mais</a>
+            <a href="https://fetecdarcy.github.io/landingpage-fetec2025/" class="btn reveal" target="_blank">Saiba Mais</a>
           </div>
         </div>
       </section>
@@ -1300,20 +1482,20 @@
       <section id="curso" class="section-curso">
         <div class="curso-container">
           <div class="container code-style-text">
-            <h1>&lt;Informática para Internet/&gt;</h1>
+            <h1 class="reveal">&lt;Informática para Internet/&gt;</h1>
             
-            <p class="code-line"><span class="code-keyword">const</span> curso = <span class="code-string">"Informática para Internet"</span>;</p>
+            <p class="code-line reveal-left"><span class="code-keyword">const</span> curso = <span class="code-string">"Informática para Internet"</span>;</p>
             
-            <p class="normal-text">O curso prepara o aluno para o desenvolvimento de websites, aplicativos, e-commerce e serviços relacionados, além de fornecer uma base sólida em tecnologias de programação, banco de dados e desenvolvimento web.</p>
+            <p class="normal-text reveal">O curso prepara o aluno para o desenvolvimento de websites, aplicativos, e-commerce e serviços relacionados, além de fornecer uma base sólida em tecnologias de programação, banco de dados e desenvolvimento web.</p>
             
-            <p class="code-line"><span class="code-variable">skills</span><span class="code-push">.push </span>(<span class="code-string">"HTML"</span>, <span class="code-string">"CSS"</span>, <span class="code-string">"JavaScript"</span>, <span class="code-string">"Banco de Dados"</span>);</p>
+            <p class="code-line reveal-left"><span class="code-variable">skills</span><span class="code-push">.push </span>(<span class="code-string">"HTML"</span>, <span class="code-string">"CSS"</span>, <span class="code-string">"JavaScript"</span>, <span class="code-string">"Banco de Dados"</span>);</p>
             
-            <p class="normal-text">O curso promove habilidades essenciais para a sociedade atual, formando profissionais preparados para o mercado digital. </p>
+            <p class="normal-text reveal">O curso promove habilidades essenciais para a sociedade atual, formando profissionais preparados para o mercado digital. </p>
             
-            <p class="code-line"><span class="code-keyword">return</span> <span class="code-string">"Vem ser Etec!"</span>;</p>
+            <p class="code-line reveal-left"><span class="code-keyword">return</span> <span class="code-string">"Vem ser Etec!"</span>;</p>
           </div>
 
-          <div class="video-frame">
+          <div class="video-frame reveal-right">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/DdQQlsltrQs" title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1325,8 +1507,8 @@
 
       <section id="exposicoes" class="section-exposicoes">
         <div class="exposicoes-topo">
-          <h2>Exposições</h2>
-          <a class="expo-all-btn" href="#lista-exposicoes">Ver todas as exposições</a>
+          <h2 class="reveal">Exposições</h2>
+          <a class="expo-all-btn reveal" href="#lista-exposicoes">Ver todas as exposições</a>
         </div>
 
         <div class="expo-carousel" id="expoCarousel">
@@ -1334,12 +1516,7 @@
             <i class="fas fa-chevron-left"></i>
           </button>
 
-          <div class="expo-preview expo-preview-left" id="expoPreviewLeft" aria-hidden="true">
-            <img src="./assets/robotica.jpg" alt="">
-            <div class="expo-preview-overlay"></div>
-          </div>
-
-          <article class="expo-feature" id="expoFeatureBlock">
+          <article class="expo-feature reveal" id="expoFeatureBlock">
             <div class="expo-media">
               <img id="expoMainImage" src="./assets/scratch.jpg" alt="Scratch">
             </div>
@@ -1365,11 +1542,6 @@
             </div>
           </article>
 
-          <div class="expo-preview expo-preview-right" id="expoPreviewRight" aria-hidden="true">
-            <img src="./assets/jogo2.png" alt="">
-            <div class="expo-preview-overlay"></div>
-          </div>
-
           <button class="expo-arrow expo-next" id="expoNext" type="button" aria-label="Próxima exposição">
             <i class="fas fa-chevron-right"></i>
           </button>
@@ -1378,7 +1550,7 @@
         <div class="expo-dots" id="expoDots"></div>
 
         <div class="expo-lista" id="lista-exposicoes">
-          <article class="expo-card" tabindex="0" role="link"
+          <article class="expo-card reveal" tabindex="0" role="link"
             data-link="https://tavernf.github.io/scratchFetec/?classId=c6af9f25-f24a-40c1-a965-c255e58e8c64&assignmentId=8038706a-d8e9-40b2-9cb1-9293a20190b9&submissionId=cee6d9f2-fc96-513a-1a38-16f6d33ec50d#redes"
             data-target="_blank">
             <img src="./assets/scratch.jpg" alt="Scratch">
@@ -1390,7 +1562,7 @@
             </div>
           </article>
 
-          <article class="expo-card" tabindex="0" role="link" data-link="https://jucdreis.github.io/disney-musicas"
+          <article class="expo-card reveal" tabindex="0" role="link" data-link="https://jucdreis.github.io/disney-musicas"
             data-target="_blank">
             <img src="./assets/musica.png" alt="Qual é a Música?">
             <div>
@@ -1401,7 +1573,7 @@
             </div>  
           </article>
 
-          <article class="expo-card" tabindex="0" role="link"
+          <article class="expo-card reveal" tabindex="0" role="link"
             data-link="https://mlkhilo.github.io/hilo-cards/?fbclid=PAb21jcANKjh5leHRuA2FlbQIxMQABp8DnzI17LA4Y5rGiJSauopifNelmCSI-J9bEIezSnBdZ3Pnug-jXf_3ZiVDr_aem_lIrI5MazvrlS27ycsbkk_Q"
             data-target="_blank">
             <img src="./assets/hilocards.jpg" alt="Hilo Cards">
@@ -1413,7 +1585,7 @@
             </div>
           </article>
 
-          <article class="expo-card" tabindex="0" role="link"
+          <article class="expo-card reveal" tabindex="0" role="link"
             data-link="https://matzhen.github.io/Projeto-FETEC/?classId=15c5af82-c6ca-48ee-960f-2c20cecbab59&assignmentId=dd9af1f4-26f9-4c8d-9b86-26625dc99a76&submissionId=8b2b52d0-3d57-bcb6-9c7d-f60b9ded146a"
             data-target="_blank">
             <img src="./assets/Temperamentando.jpg" alt="Teste de Temperamento">
@@ -1425,7 +1597,7 @@
             </div>
           </article>
 
-          <article class="expo-card" tabindex="0" role="link" data-link="https://livcarsu.github.io/VocacaoPolar/"
+          <article class="expo-card reveal" tabindex="0" role="link" data-link="https://livcarsu.github.io/VocacaoPolar/"
             data-target="_blank">
             <img src="./assets/vocacional.png" alt="Teste Vocacional">
             <div>
@@ -1435,7 +1607,7 @@
             </div>
           </article>
 
-          <article class="expo-card" tabindex="0" role="link" data-link="https://fetecdarcy.github.io/roboticadje"
+          <article class="expo-card reveal" tabindex="0" role="link" data-link="https://fetecdarcy.github.io/roboticadje"
             data-target="_blank">
             <img src="./assets/robotica.jpg" alt="Robótica">
             <div>
@@ -1451,13 +1623,13 @@
 
     <footer id="contato">
       <div class="footer-container">
-        <div class="footer-text-group">
+        <div class="footer-text-group reveal-left">
           <span>&copy; 2026</span>
           <img src="assets/infotec.svg" alt="logo Infotec" class="logoM">
           <span> &mdash; Todos os direitos reservados. <span class="credit">@abnerssk</span></span>
         </div>
         
-        <div class="social-icons">
+        <div class="social-icons reveal-right">
           <a href="https://www.facebook.com/etec.darcy.pereira.de.moraes.2025" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
             <i class="fab fa-facebook-f"></i>
           </a>
@@ -1486,8 +1658,8 @@
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
           document.body.classList.add('light-mode');
-          themeIcon.classList.remove('fa-sun');
-          themeIcon.classList.add('fa-moon');
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
         }
 
         themeToggle.addEventListener('click', () => {
@@ -1495,15 +1667,51 @@
           const isLightMode = document.body.classList.contains('light-mode');
 
           if (isLightMode) {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-            localStorage.setItem('theme', 'light');
-          } else {
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
+            localStorage.setItem('theme', 'light');
+          } else {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
             localStorage.setItem('theme', 'dark');
           }
+
+          // Animação apenas no botão (não no resto do site)
+          themeToggle.classList.remove('theme-toggle--anim');
+          void themeToggle.offsetWidth; // força reflow para reiniciar a animação
+          themeToggle.classList.add('theme-toggle--anim');
         });
+
+        themeToggle.addEventListener('animationend', () => {
+          themeToggle.classList.remove('theme-toggle--anim');
+        });
+
+        // Animação dos textos ao abrir a página e ao rolar (scroll reveal)
+        const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+        revealEls.forEach((el, index) => {
+          // Stagger: cria um efeito cascata entre elementos próximos sem delays muito longos
+          el.style.setProperty('--reveal-i', index % 6);
+        });
+
+        if ('IntersectionObserver' in window) {
+          const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+          });
+
+          revealEls.forEach((el) => revealObserver.observe(el));
+        } else {
+          // Fallback para navegadores sem suporte: apenas exibe os textos
+          revealEls.forEach((el) => el.classList.add('in-view'));
+        }
 
         const slides = [
           {
@@ -1514,9 +1722,7 @@
             thumbs: ['./assets/exposicoes/scratch1.png', './assets/exposicoes/scratch2.png', './assets/exposicoes/scratch3.png', './assets/exposicoes/scratch4.png'],
             tagText: 'Projeto em destaque',
             tagIcon: 'fa-star',
-            tagTheme: 'tag-gold', // Dourado
-            previewLeft: './assets/robotica.jpg',
-            previewRight: './assets/musica.png'
+            tagTheme: 'tag-gold'
           },
           {
             title: 'Qual é a Música?',
@@ -1526,9 +1732,7 @@
             thumbs: ['./assets/exposicoes/musica1.png', './assets/exposicoes/musica2.png', './assets/exposicoes/musica3.png', './assets/exposicoes/musica4.png'],
             tagText: 'Feitos pelos alunos',
             tagIcon: 'fa-users',
-            tagTheme: 'tag-default',
-            previewLeft: './assets/scratch.jpg',
-            previewRight: './assets/hilocards.jpg'
+            tagTheme: 'tag-default'
           },
           {
             title: 'Hilo Cards',
@@ -1538,9 +1742,7 @@
             thumbs: ['./assets/exposicoes/hilocards1.png', './assets/exposicoes/hilocards2.png', './assets/exposicoes/hilocards3.png', './assets/exposicoes/hilocards4.png'],
             tagText: 'Feitos pelos alunos',
             tagIcon: 'fa-users',
-            tagTheme: 'tag-default',
-            previewLeft: './assets/musica.png',
-            previewRight: './assets/Temperamentando.jpg'
+            tagTheme: 'tag-default'
           },
           {
             title: 'Teste de Temperamento',
@@ -1550,9 +1752,7 @@
             thumbs: ['./assets/exposicoes/temperamentando1.png', './assets/exposicoes/temperamentando2.png', './assets/exposicoes/temperamentando3.png', './assets/exposicoes/temperamentando4.png'],
             tagText: 'Feitos pelos alunos',
             tagIcon: 'fa-users',
-            tagTheme: 'tag-default',
-            previewLeft: './assets/hilocards.jpg',
-            previewRight: './assets/vocacional.jpg'
+            tagTheme: 'tag-default'
           },
           {
             title: 'Teste Vocacional',
@@ -1561,10 +1761,8 @@
             link: 'https://livcarsu.github.io/VocacaoPolar/',
             thumbs: ['./assets/exposicoes/vocacional1.png', './assets/exposicoes/vocacional2.png', './assets/exposicoes/vocacional3.png', './assets/exposicoes/vocacional4.png'],
             tagText: 'Projeto do TCC',
-            tagIcon: 'fa-graduation-cap', // Alterado o ícone para formato de chapéu de TCC
-            tagTheme: 'tag-blue', // Azul
-            previewLeft: './assets/Temperamentando.jpg',
-            previewRight: './assets/robotica.jpg'
+            tagIcon: 'fa-graduation-cap',
+            tagTheme: 'tag-blue'
           },
           {
             title: 'Robótica',
@@ -1574,9 +1772,7 @@
             thumbs: ['./assets/exposicoes/robotica1.png', './assets/exposicoes/robotica2.png', './assets/exposicoes/robotica3.png', './assets/exposicoes/robotica4.png'],
             tagText: 'Feitos pelos alunos',
             tagIcon: 'fa-users',
-            tagTheme: 'tag-default',
-            previewLeft: './assets/vocacional.jpg',
-            previewRight: './assets/scratch.jpg'
+            tagTheme: 'tag-default'
           }
         ];
 
@@ -1590,8 +1786,6 @@
         const expoTagIcon = document.querySelector('#expoTagIcon');
         const expoPanel = document.querySelector('.expo-panel');
         const expoDots = document.querySelector('#expoDots');
-        const expoPreviewLeft = document.querySelector('#expoPreviewLeft img');
-        const expoPreviewRight = document.querySelector('#expoPreviewRight img');
         const expoPrev = document.querySelector('#expoPrev');
         const expoNext = document.querySelector('#expoNext');
         const expoCards = document.querySelectorAll('.expo-card');
@@ -1601,6 +1795,14 @@
         let currentIndex = 0;
         let autoPlayId = null;
         let isHovering = false;
+
+        // --- CORREÇÃO AQUI ---
+        // Limpa as classes de animação assim que o card terminar de deslizar
+        // Isso permite que o :hover volte a acessar a propriedade transform do CSS
+        expoFeatureBlock.addEventListener('animationend', () => {
+          expoFeatureBlock.classList.remove('slide-in-next', 'slide-in-prev');
+        });
+        // ---------------------
 
         // Lógica aprimorada para transição de slides e animação
         function goToSlide(index) {
@@ -1657,8 +1859,6 @@
 
         function updateCarousel() {
           const slide = slides[currentIndex];
-          const prevSlide = slides[(currentIndex - 1 + slides.length) % slides.length];
-          const nextSlide = slides[(currentIndex + 1) % slides.length];
 
           expoTitle.textContent = slide.title;
           expoDescription.textContent = slide.description;
@@ -1671,8 +1871,6 @@
           expoTag.className = `expo-tag ${slide.tagTheme || 'tag-default'}`;
 
           expoPanel.classList.toggle('expo-panel--compact', slide.title === 'Teste de Temperamento');
-          expoPreviewLeft.src = prevSlide.image;
-          expoPreviewRight.src = nextSlide.image;
 
           expoThumbs.innerHTML = '';
           slide.thumbs.forEach((thumb, index) => {
@@ -1759,9 +1957,6 @@
 
         expoNext.addEventListener('click', () => goNext());
         expoPrev.addEventListener('click', () => goPrev());
-
-        document.getElementById('expoPreviewLeft').addEventListener('click', () => goPrev());
-        document.getElementById('expoPreviewRight').addEventListener('click', () => goNext());
 
         expoCards.forEach((card) => {
           const link = card.dataset.link;
