@@ -340,7 +340,7 @@
           url('assets/dragon.png'),
           url('assets/matrix-background.gif'), 
           linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
-        background-position: 80% bottom, center, 90% center, center, center;
+        background-position: 80% bottom, center, 96% center, center, center;
         background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
         background-size: 100% 100%, cover, contain, cover, cover; 
         
@@ -360,7 +360,7 @@
           url('assets/dragon.png'),
           url('assets/matrix-background.gif'), 
           linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
-        background-position: 80% bottom, center, 90% center, center, center;
+        background-position: 80% bottom, center, 96% center, center, center;
         background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
         background-size: 100% 100%, cover, contain, cover, cover;
       }
@@ -372,6 +372,13 @@
         display: flex;
         align-items: flex-start;
         justify-content: flex-start; /* Alinhado à esquerda */
+      }
+
+      /* Em telas largas, desloca o bloco de texto levemente para a esquerda */
+      @media (min-width: 1100px) {
+        .section-fetec .container {
+          transform: translateX(-2rem);
+        }
       }
 
       .section-fetec .container {
