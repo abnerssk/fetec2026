@@ -280,20 +280,21 @@
       @keyframes theme-toggle-flip {
         0% {
           transform: scale(1) rotate(0deg);
+          opacity: 1;
         }
-        40% {
-          transform: scale(0.7) rotate(160deg);
-        }
-        70% {
-          transform: scale(1.25) rotate(225deg);
+        50% {
+          transform: scale(0.5) rotate(180deg);
+          opacity: 0.2; /* Suaviza visualmente a troca exata do ícone HTML */
         }
         100% {
           transform: scale(1) rotate(360deg);
+          opacity: 1;
         }
       }
 
       #theme-toggle.theme-toggle--anim i {
-        animation: theme-toggle-flip 0.55s var(--ease-fluid, ease);
+        /* Curva elástica (spring) para um efeito ultra fluido */
+        animation: theme-toggle-flip 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
       }
 
       .header-actions {
@@ -713,8 +714,15 @@
         border-radius: 999px;
         font-size: 0.85rem;
         margin: auto 0; 
-        transition: background 0.3s ease, color 0.3s ease;
+        transition: background 0.3s ease, color 0.3s ease, transform 0.22s cubic-bezier(.2,.8,.2,1), box-shadow 0.22s ease, filter 0.22s ease;
         border: none;
+        cursor: default;
+      }
+
+      .expo-tag:hover {
+        transform: scale(1.08);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.28);
+        filter: brightness(1.15);
       }
 
       .tag-default {
@@ -749,6 +757,15 @@
 
       .expo-tag i {
         font-size: 0.8rem;
+      }
+
+      /* Container para múltiplos badges no carrossel */
+      .expo-tags-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+        margin: auto 0;
       }
 
       .expo-panel h3 {
@@ -1034,6 +1051,17 @@
         margin-left: 0.2rem;
       }
 
+      .footer-credit {
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s ease, text-shadow 0.2s ease;
+      }
+
+      .footer-credit:hover {
+        color: var(--accent);
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.45);
+      }
+
       .social-icons {
         display: flex;
         gap: 1.5rem;
@@ -1135,11 +1163,33 @@
           padding: 0;
         }
 
+        /* * REMOÇÃO DO DRAGÃO NO MOBILE: 
+         * A propriedade background-image foi reescrita com 4 camadas (sem o dragon.png).
+         * As propriedades position, repeat e size foram ajustadas de 5 itens para 4 itens.
+         */
         .section-fetec {
           min-height: auto;
           padding: 3rem 1.5rem; 
-          background-position: center bottom, center, center center, center, center;
-          background-size: 100% 100%, cover, contain, cover, cover;
+          background-image: 
+            linear-gradient(to bottom, transparent 60%, var(--bg) 100%),
+            linear-gradient(var(--overlay-1), var(--overlay-2)), 
+            url('assets/matrix-background.gif'), 
+            linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
+          background-position: center bottom, center, center, center;
+          background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+          background-size: 100% 100%, cover, cover, cover;
+        }
+
+        /* Mesmo ajuste aplicado para quando o mobile estiver em Light Mode */
+        body.light-mode .section-fetec {
+          background-image: 
+            linear-gradient(to bottom, transparent 55%, var(--bg) 100%),
+            linear-gradient(100deg, rgba(240, 255, 244, 0.82) 0%, rgba(220, 245, 228, 0.55) 50%, transparent 75%),
+            url('assets/matrix-background.gif'), 
+            linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
+          background-position: center bottom, center, center, center;
+          background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+          background-size: 100% 100%, cover, cover, cover;
         }
 
         .section-fetec .container a.btn {
@@ -1442,6 +1492,68 @@
           transform: none;
         }
       }
+
+      /* ===== BADGES DOS CARDS SECUNDÁRIOS ===== */
+      .card-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-top: 0.35rem;
+        margin-bottom: 0.1rem;
+      }
+
+      .card-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.28rem;
+        padding: 0.18rem 0.55rem;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        white-space: nowrap;
+        cursor: default;
+        transition: transform 0.22s cubic-bezier(.2,.8,.2,1), box-shadow 0.22s ease, filter 0.22s ease;
+      }
+
+      .card-badge:hover {
+        transform: scale(1.1);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+        filter: brightness(1.18);
+      }
+
+      .card-badge i {
+        font-size: 0.65rem;
+      }
+
+      .card-badge.badge-gold {
+        background: rgba(255, 215, 0, 0.15);
+        color: #fde047;
+      }
+
+      .card-badge.badge-blue {
+        background: rgba(0, 150, 255, 0.15);
+        color: #7dd3fc;
+      }
+
+      .card-badge.badge-default {
+        background: rgba(255, 255, 255, 0.12);
+        color: #e2e8f0;
+      }
+
+      body.light-mode .card-badge.badge-gold {
+        background: rgba(180, 130, 0, 0.12);
+        color: #92660a;
+      }
+
+      body.light-mode .card-badge.badge-blue {
+        background: rgba(0, 100, 200, 0.12);
+        color: #0369a1;
+      }
+
+      body.light-mode .card-badge.badge-default {
+        background: rgba(15, 23, 42, 0.10);
+        color: #334155;
+      }
     </style>
   </head>
 
@@ -1536,10 +1648,16 @@
 
               <div class="expo-miniaturas" id="expoThumbs"></div>
 
-              <span class="expo-tag" id="expoTag">
-                <i class="fas fa-star" id="expoTagIcon" aria-hidden="true"></i>
-                <span id="expoTagText">Projeto em destaque</span>
-              </span>
+              <div class="expo-tags-row">
+                <span class="expo-tag" id="expoTag">
+                  <i class="fas fa-star" id="expoTagIcon" aria-hidden="true"></i>
+                  <span id="expoTagText">Projeto em destaque</span>
+                </span>
+                <span class="expo-tag tag-default" id="expoTag2" style="display:none;">
+                  <i class="fas fa-users" aria-hidden="true"></i>
+                  <span>Feito pelos alunos</span>
+                </span>
+              </div>
 
               <a id="expoLink" class="expo-btn"
                 href="https://tavernf.github.io/scratchFetec/?classId=c6af9f25-f24a-40c1-a965-c255e58e8c64&assignmentId=8038706a-d8e9-40b2-9cb1-9293a20190b9&submissionId=cee6d9f2-fc96-513a-1a38-16f6d33ec50d#redes"
@@ -1633,7 +1751,7 @@
         <div class="footer-text-group reveal-left">
           <span>&copy; 2026</span>
           <img src="assets/infotec.svg" alt="logo Infotec" class="logoM">
-          <span> &mdash; Todos os direitos reservados. <span class="credit">@abnerssk</span></span>
+          <span> &mdash; Todos os direitos reservados. <a href="https://github.com/abnerssk" target="_blank" rel="noopener noreferrer" class="footer-credit">@abnerssk</a></span>
         </div>
         
         <div class="social-icons reveal-right">
@@ -1729,7 +1847,8 @@
             thumbs: ['./assets/exposicoes/scratch1.png', './assets/exposicoes/scratch2.png', './assets/exposicoes/scratch3.png', './assets/exposicoes/scratch4.png'],
             tagText: 'Projeto em destaque',
             tagIcon: 'fa-star',
-            tagTheme: 'tag-gold'
+            tagTheme: 'tag-gold',
+            tag2: true
           },
           {
             title: 'Qual é a Música?',
@@ -1769,7 +1888,8 @@
             thumbs: ['./assets/exposicoes/vocacional1.png', './assets/exposicoes/vocacional2.png', './assets/exposicoes/vocacional3.png', './assets/exposicoes/vocacional4.png'],
             tagText: 'Projeto do TCC',
             tagIcon: 'fa-graduation-cap',
-            tagTheme: 'tag-blue'
+            tagTheme: 'tag-blue',
+            tag2: true
           },
           {
             title: 'Robótica',
@@ -1791,6 +1911,7 @@
         const expoTag = document.querySelector('#expoTag');
         const expoTagText = document.querySelector('#expoTagText');
         const expoTagIcon = document.querySelector('#expoTagIcon');
+        const expoTag2 = document.querySelector('#expoTag2');
         const expoPanel = document.querySelector('.expo-panel');
         const expoDots = document.querySelector('#expoDots');
         const expoPrev = document.querySelector('#expoPrev');
@@ -1876,6 +1997,7 @@
           expoTagText.textContent = slide.tagText;
           expoTagIcon.className = `fas ${slide.tagIcon}`;
           expoTag.className = `expo-tag ${slide.tagTheme || 'tag-default'}`;
+          expoTag2.style.display = slide.tag2 ? 'inline-flex' : 'none';
 
           expoPanel.classList.toggle('expo-panel--compact', slide.title === 'Teste de Temperamento');
 
