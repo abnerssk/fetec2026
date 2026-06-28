@@ -457,6 +457,27 @@
         border: 1px solid var(--border);
       }
 
+      /* Light-mode: btns (fetec + carrossel saiba mais) ficam cinza com hover preto */
+      body.light-mode .section-fetec .container a.btn,
+      body.light-mode .expo-btn {
+        background: rgba(80, 80, 80, 0.18);
+        color: #2d2d2d;
+        border-color: rgba(80, 80, 80, 0.45);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 8px 22px rgba(0,0,0,.10);
+      }
+
+      body.light-mode .section-fetec .container a.btn::before,
+      body.light-mode .expo-btn::before {
+        background: rgba(100, 100, 100, 0.10);
+      }
+
+      body.light-mode .section-fetec .container a.btn:hover,
+      body.light-mode .expo-btn:hover {
+        color: #000000;
+        border-color: rgba(80, 80, 80, 0.70);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 15px 35px rgba(0,0,0,.15);
+      }
+
       /* Light-mode: footer border top */
       body.light-mode footer {
         border-top-color: var(--border-strong);
@@ -590,15 +611,15 @@
         font-family: "Chakra Petch", sans-serif;
         font-weight: 600;
         box-shadow: var(--glass-inset);
-        transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+        transition: transform .25s var(--ease-fluid), background .2s ease, border-color .2s ease, box-shadow .2s ease;
         white-space: nowrap;
       }
 
       .expo-all-btn:hover {
-        transform: translateY(-2px);
+        transform: scale(1.08);
         background: var(--glass-bg-strong);
         border-color: var(--glass-border-accent);
-        box-shadow: 0 0 0 1px var(--glass-border-accent), var(--glass-inset);
+        box-shadow: 0 0 20px rgba(0, 200, 50, 0.20), var(--glass-inset);
       }
 
       /* Flex layout atualizado para Seta + Card + Seta */
@@ -624,13 +645,16 @@
         box-shadow: var(--glass-shadow), var(--glass-inset);
         border: 1px solid var(--glass-border);
         cursor: pointer;
-        transition: transform 0.3s var(--ease-fluid), box-shadow 0.3s ease, border-color 0.3s ease;
+        position: relative;
+        z-index: 1;
+        transition: transform 0.3s var(--ease-fluid), box-shadow 0.3s ease, border-color 0.3s ease, z-index 0s;
       }
 
       .expo-feature:hover {
-      transform: translateY(-4px) scale(1.01); 
-      border-color: var(--glass-border-accent); 
-      box-shadow: 0 0 20px rgba(0, 200, 50, 0.20), var(--glass-inset);
+        transform: scale(1.08);
+        border-color: var(--glass-border-accent);
+        box-shadow: 0 0 20px rgba(0, 200, 50, 0.20), var(--glass-inset);
+        z-index: 3;
       }
       
       /* ANIMAÇÕES DO CARROSSEL (Slide e Fade) */
@@ -875,7 +899,6 @@
       }
 
       .expo-arrow:hover {
-        background: rgba(0, 200, 50, 0.25);
         border-color: var(--glass-border-accent);
         box-shadow: 0 0 20px rgba(0, 200, 50, 0.20), var(--glass-inset);
         transform: scale(1.08);
@@ -925,7 +948,7 @@
         display: flex;
         gap: 1.2rem;
         align-items: center;
-        transition: transform .25s var(--ease-fluid), background .2s ease, border-color .2s ease, box-shadow .2s ease;
+        transition: transform .3s var(--ease-fluid), background .2s ease, border-color .2s ease, box-shadow .25s ease;
         min-height: auto;
         height: 100%;
         cursor: pointer;
@@ -935,10 +958,10 @@
       }
 
       .expo-card:hover {
-        transform: translateY(-3px);
+        transform: scale(1.08);
         background: var(--card-dark-hover);
         border-color: var(--glass-border-accent);
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 0 20px rgba(0, 200, 50, 0.20), var(--glass-inset);
       }
 
       .expo-card:focus-visible {
@@ -1554,6 +1577,8 @@
         background: rgba(15, 23, 42, 0.10);
         color: #334155;
       }
+
+      /* ===== FIM DOS ESTILOS ===== */
     </style>
   </head>
 
@@ -1761,8 +1786,8 @@
           <a href="https://www.instagram.com/etecdarcypereira?igsh=MWdubDEwOGNnMWJpcw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="https://github.com/fetecdarcy" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <i class="fab fa-github"></i>
+          <a href="https://etecdpm.cps.sp.gov.br/" target="_blank" rel="noopener noreferrer" aria-label="Site da Escola">
+            <i class="fas fa-school"></i>
           </a>
         </div>
       </div>
