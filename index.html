@@ -60,7 +60,7 @@
         --code-variable: #9cdcfe;
 
         /* Animações */
-        --ease-fluid: cubic-bezier(0.25, 1, 0.5, 1);
+        --ease-fluid: cubic-bezier(0.2, 0.8, 0.2, 1);
 
         /* Componentes com fundo escuro fixo */
         --card-dark: rgba(0, 18, 6, 0.80);
@@ -336,34 +336,55 @@
         width: 100%;
         background-color: transparent;
         background-image: 
-          linear-gradient(to bottom, transparent 60%, var(--bg) 100%),
+          linear-gradient(to bottom,
+            transparent 0%,
+            transparent 40%,
+            rgba(4, 13, 5, 0.55) 65%,
+            rgba(4, 13, 5, 0.88) 80%,
+            var(--bg) 100%
+          ),
           linear-gradient(var(--overlay-1), var(--overlay-2)), 
-          url('assets/dragon.png'),
-          url('assets/matrix-background.gif'), 
+          url('assets/hacker.jpg'),
           linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
-        background-position: 80% bottom, center, 96% center, center, center;
-        background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-        background-size: 100% 100%, cover, contain, cover, cover; 
+        background-position: 80% bottom, center, 102% center, center;
+        background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+        background-size: 100% 100%, cover, contain, cover; 
         
         color: var(--text);
-        padding: 18vh 2rem 8rem;
+        padding: 18vh 2rem 8rem 4%;
         min-height: 100vh;
         display: flex;
         align-items: flex-start;
         transition: background-color 0.3s ease;
       }
 
+      /* Faixa de fusão suave logo abaixo da seção FETEC */
+      .section-fetec-blend {
+        width: 100%;
+        height: 120px;
+        margin-top: -120px;
+        background: linear-gradient(to bottom, transparent, var(--bg));
+        pointer-events: none;
+        position: relative;
+        z-index: 1;
+      }
+
       /* Overrides do Modo Claro para a Seção Fetec */
       body.light-mode .section-fetec {
         background-image: 
-          linear-gradient(to bottom, transparent 55%, var(--bg) 100%),
+          linear-gradient(to bottom,
+            transparent 0%,
+            transparent 38%,
+            rgba(240, 255, 244, 0.60) 62%,
+            rgba(240, 255, 244, 0.92) 80%,
+            var(--bg) 100%
+          ),
           linear-gradient(100deg, rgba(240, 255, 244, 0.82) 0%, rgba(220, 245, 228, 0.55) 50%, transparent 75%),
-          url('assets/dragon.png'),
-          url('assets/matrix-background.gif'), 
+          url('assets/hacker.jpg'),
           linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
-        background-position: 80% bottom, center, 96% center, center, center;
-        background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-        background-size: 100% 100%, cover, contain, cover, cover;
+        background-position: 80% bottom, center, 102% center, center;
+        background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+        background-size: 100% 100%, cover, contain, cover;
       }
 
       .fetec-wrapper {
@@ -372,21 +393,21 @@
         width: 100%;
         display: flex;
         align-items: flex-start;
-        justify-content: flex-start; /* Alinhado à esquerda */
+        justify-content: flex-start;
       }
 
-      /* Em telas largas, desloca o bloco de texto levemente para a esquerda */
+      /* Em telas largas, desloca o bloco de texto para a esquerda */
       @media (min-width: 1100px) {
         .section-fetec .container {
-          transform: translateX(-2rem);
+          transform: translateX(-8rem);
         }
       }
 
       .section-fetec .container {
-        max-width: 650px; /* Largura reduzida para melhor leitura à esquerda */
+        max-width: 650px;
         display: flex;
         flex-direction: column;
-        align-items: flex-start; /* Alinhado à esquerda */
+        align-items: flex-start;
       }
 
       .fetec-title {
@@ -397,17 +418,16 @@
         margin-bottom: 0.5rem;
         letter-spacing: 2px;
         text-transform: uppercase;
-        text-shadow: var(--title-glow); 
         text-align: left;
       }
 
       .fetec-subtitle {
-        color: #b3ffcc; 
+        color: var(--accent-2); 
         font-size: 1.15rem;
         font-weight: 700; 
         margin-bottom: 2rem;
         text-align: left;
-        text-shadow: 0 2px 5px rgba(0,0,0,0.9), 0 0 12px rgba(0, 200, 50, 0.4); 
+        text-shadow: 0 2px 5px rgba(0,0,0,0.9), 0 0 16px rgba(0, 255, 65, 0.25); 
         letter-spacing: 0.3px;
       }
 
@@ -416,7 +436,7 @@
         margin-bottom: 1.2rem;
         line-height: 1.6;
         color: #f1f5f9; 
-        font-weight: 500; 
+        font-weight: 700; 
         font-size: 1.1rem; 
         text-align: justify;
         text-shadow: 0 2px 4px rgba(0,0,0,0.7); 
@@ -431,7 +451,7 @@
 
       body.light-mode .section-fetec .container p {
         color: #0f172a; 
-        font-weight: 600;
+        font-weight: 700;
         text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
       }
 
@@ -439,8 +459,6 @@
         color: #0f172a;
         text-shadow: 0 1px 6px rgba(255,255,255,0.9), 0 3px 12px rgba(255,255,255,0.6);
       }
-
-
 
       /* Light-mode: curso container border for visibility */
       body.light-mode .curso-container {
@@ -490,12 +508,101 @@
 
       /* Hover no trecho "Informática para Internet" do texto de introdução */
       .curso-highlight {
-        transition: color 0.3s ease, text-shadow 0.3s ease;
+        transition:
+          color .25s var(--ease-fluid),
+          text-shadow .25s var(--ease-fluid);
       }
 
       .curso-highlight:hover {
         color: var(--accent);
-        text-shadow: 0 0 10px rgba(0, 255, 65, 0.45);
+        text-shadow: 0 0 20px rgba(0, 200, 50, 0.20);
+      }
+
+      /* ===== SEÇÃO STATS ===== */
+      .stats-section {
+        background: transparent;
+        color: var(--text);
+        padding: 2.5rem 2rem 0;
+      }
+
+      .stats-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        overflow: visible;
+      }
+
+      .stat-item {
+          position: relative;
+          z-index: 0;
+          cursor: pointer;
+
+          background: var(--card-dark);
+          border-radius: 20px;
+          padding: 2.2rem 1.5rem;
+          text-align: center;
+
+          box-shadow: var(--glass-shadow), var(--glass-inset);
+
+          will-change: transform, box-shadow, border-color;
+
+          transition:
+              transform .25s var(--ease-fluid),
+              background .2s ease,
+              border-color .2s ease,
+              box-shadow .2s ease;
+      }
+
+      .stat-item:hover {
+          border-color: var(--glass-border-accent);
+          transform: scale(1.08);
+          z-index: 4;
+      }
+
+      .stat-item h3 {
+        font-family: "Chakra Petch", sans-serif;
+        font-size: clamp(2.2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: var(--accent);
+        margin: 0 0 0.4rem 0;
+        text-shadow: var(--title-glow);
+        line-height: 1.1;
+        transition: text-shadow 0.35s ease;
+      }
+
+      .stat-item p {
+        font-family: "Inter", sans-serif;
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin: 0;
+        line-height: 1.4;
+        transition: color 0.25s ease;
+      }
+
+      .stat-item:hover p {
+        color: var(--text-dim);
+      }
+      
+      body.light-mode .stat-item {
+        border-color: var(--border-strong);
+      }
+
+      body.light-mode .stat-item:hover {
+        border-color: var(--glass-border-accent);
+      }
+
+      @media (max-width: 768px) {
+        .stats-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .stats-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
 
       /* ===== SEÇÃO CURSO (ESTILO CÓDIGO) ===== */
@@ -505,7 +612,6 @@
         padding: 3rem 2rem 5rem;
       }
 
-      /* NOVO ESTILO: Todo o fundo movido para englobar texto e vídeo */
       .curso-container {
         max-width: 1280px;
         margin: 0 auto;
@@ -516,14 +622,12 @@
         justify-content: space-between;
         width: 100%;
         
-        /* Fundo Glass para ambos */
         background: var(--card-dark);
         border-radius: 20px;
         padding: 3.5rem 4rem;
         box-shadow: var(--glass-shadow), var(--glass-inset);
       }
 
-      /* Bloco de texto do curso agora usa apenas o layout, o bg está no pai */
       .code-style-text {
         display: flex;
         flex-direction: column;
@@ -584,11 +688,12 @@
 
       .exposicoes-topo {
           max-width: 1280px;
-          margin: 0 auto .35rem; /* antes era 1.2rem */
+          margin: 0 auto .35rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
           gap: 1rem;
+          padding: 0 10px;
       }
 
       .exposicoes-topo h2 {
@@ -617,12 +722,11 @@
 
       .expo-all-btn:hover {
         transform: scale(1.08);
-        background: var(--glass-bg-strong);
+        background: var(--preview-dark);
         border-color: var(--glass-border-accent);
         box-shadow: 0 0 20px rgba(0, 200, 50, 0.20), var(--glass-inset);
       }
 
-      /* Flex layout atualizado para Seta + Card + Seta */
       .expo-carousel {
         max-width: 1280px;
         margin: 0 auto;
@@ -630,13 +734,12 @@
         display: flex;
         align-items: center; 
         gap: 2rem;
-        padding: 20px 0 5px; 
-        contain: layout style;
+        padding: 20px 10px 20px;
       }
 
       /* Card Principal em Destaque */
       .expo-feature {
-        flex: 1; /* Ocupa todo o espaço restante do flex */
+        flex: 1;
         display: grid;
         grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr);
         border-radius: 18px;
@@ -647,30 +750,30 @@
         cursor: pointer;
         position: relative;
         z-index: 1;
-        transition: transform 0.3s var(--ease-fluid), box-shadow 0.3s ease, border-color 0.3s ease, z-index 0s;
+        will-change: transform, box-shadow, border-color;
+        transition: transform 0.4s var(--ease-fluid), box-shadow 0.4s ease, border-color 0.4s ease;
       }
 
       .expo-feature:hover {
-        transform: scale(1.08);
+        transform: translateY(-4px) scale(1.02);
+        background: var(--card-dark);
         border-color: var(--glass-border-accent);
-        box-shadow: 0 0 20px rgba(0, 200, 50, 0.20), var(--glass-inset);
         z-index: 3;
       }
       
-      /* ANIMAÇÕES DO CARROSSEL (Slide e Fade) */
       @keyframes slideInNext {
-        0% { opacity: 0; transform: translateX(50px); }
-        100% { opacity: 1; transform: translateX(0); }
+        0% { opacity: 0; translate: 50px 0; }
+        100% { opacity: 1; translate: 0 0; }
       }
       @keyframes slideInPrev {
-        0% { opacity: 0; transform: translateX(-50px); }
-        100% { opacity: 1; transform: translateX(0); }
+        0% { opacity: 0; translate: -50px 0; }
+        100% { opacity: 1; translate: 0 0; }
       }
       .slide-in-next {
-        animation: slideInNext 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        animation: slideInNext 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       }
       .slide-in-prev {
-        animation: slideInPrev 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        animation: slideInPrev 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       }
 
       @keyframes fadeImg {
@@ -783,7 +886,6 @@
         font-size: 0.8rem;
       }
 
-      /* Container para múltiplos badges no carrossel */
       .expo-tags-row {
         display: flex;
         flex-wrap: wrap;
@@ -938,6 +1040,7 @@
         gap: 1.2rem;
         align-items: stretch;
         grid-auto-rows: 1fr;
+        padding: 10px;
       }
 
       .expo-card {
@@ -948,18 +1051,19 @@
         display: flex;
         gap: 1.2rem;
         align-items: center;
-        transition: transform .3s var(--ease-fluid), background .2s ease, border-color .2s ease, box-shadow .25s ease;
         min-height: auto;
         height: 100%;
         cursor: pointer;
         box-shadow: var(--glass-shadow), var(--glass-inset);
         user-select: none;
         text-decoration: none;
+        will-change: transform, box-shadow, border-color;
+        transition: transform 0.4s var(--ease-fluid), background 0.3s ease, border-color 0.3s ease, box-shadow 0.4s ease;
       }
 
       .expo-card:hover {
-        transform: scale(1.08);
-        background: var(--card-dark-hover);
+        transform: translateY(-4px) scale(1.03);
+        background: var(--card-dark);
         border-color: var(--glass-border-accent);
         box-shadow: 0 0 20px rgba(0, 200, 50, 0.20), var(--glass-inset);
       }
@@ -1186,21 +1290,17 @@
           padding: 0;
         }
 
-        /* * REMOÇÃO DO DRAGÃO NO MOBILE: 
-         * A propriedade background-image foi reescrita com 4 camadas (sem o dragon.png).
-         * As propriedades position, repeat e size foram ajustadas de 5 itens para 4 itens.
-         */
+
         .section-fetec {
           min-height: auto;
           padding: 3rem 1.5rem; 
           background-image: 
             linear-gradient(to bottom, transparent 60%, var(--bg) 100%),
             linear-gradient(var(--overlay-1), var(--overlay-2)), 
-            url('assets/matrix-background.gif'), 
             linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
-          background-position: center bottom, center, center, center;
-          background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-          background-size: 100% 100%, cover, cover, cover;
+          background-position: center bottom, center, center;
+          background-repeat: no-repeat, no-repeat, no-repeat;
+          background-size: 100% 100%, cover, cover;
         }
 
         /* Mesmo ajuste aplicado para quando o mobile estiver em Light Mode */
@@ -1208,11 +1308,10 @@
           background-image: 
             linear-gradient(to bottom, transparent 55%, var(--bg) 100%),
             linear-gradient(100deg, rgba(240, 255, 244, 0.82) 0%, rgba(220, 245, 228, 0.55) 50%, transparent 75%),
-            url('assets/matrix-background.gif'), 
             linear-gradient(180deg, var(--ultrablack) 0%, var(--black) 100%);
-          background-position: center bottom, center, center, center;
-          background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-          background-size: 100% 100%, cover, cover, cover;
+          background-position: center bottom, center, center;
+          background-repeat: no-repeat, no-repeat, no-repeat;
+          background-size: 100% 100%, cover, cover;
         }
 
         .section-fetec .container a.btn {
@@ -1227,7 +1326,6 @@
           padding: 3rem 1.5rem;
         }
 
-        /* Ajustes mobile para o container-card do curso */
         .curso-container {
           flex-direction: column;
           gap: 2rem;
@@ -1347,6 +1445,12 @@
               border-color .35s ease,
               background .35s ease,
               color .35s ease;
+      }
+
+      /* No hero o botão não precisa ocupar 100% — fica proporcional ao texto */
+      .section-fetec .container a.btn {
+          width: 100%;
+          margin-top: 0.5rem;
       }
 
       .section-fetec .container a.btn::before,
@@ -1493,26 +1597,39 @@
       .reveal-left,
       .reveal-right {
         opacity: 0;
-        transition: opacity 0.8s var(--ease-fluid), transform 0.8s var(--ease-fluid);
+        transition: opacity 0.8s var(--ease-fluid), translate 0.8s var(--ease-fluid);
         transition-delay: calc(var(--reveal-i, 0) * 80ms);
       }
 
-      .reveal       { transform: translateY(28px); }
-      .reveal-left  { transform: translateX(-36px); }
-      .reveal-right { transform: translateX(36px); }
+      .reveal       { translate: 0 28px; }
+      .reveal-left  { translate: -36px 0; }
+      .reveal-right { translate: 36px 0; }
 
       .reveal.in-view,
       .reveal-left.in-view,
       .reveal-right.in-view {
         opacity: 1;
-        transform: none;
+        translate: 0 0;
+        transition: opacity 0.8s var(--ease-fluid), translate 0.3s var(--ease-fluid);
+      }
+
+      /* stat-item tem classe reveal mas precisa manter suas próprias transitions de hover */
+      .stat-item.reveal,
+      .stat-item.reveal.in-view {
+        transition:
+          opacity 0.8s var(--ease-fluid),
+          translate 0.8s var(--ease-fluid),
+          transform .25s var(--ease-fluid),
+          background .2s ease,
+          border-color .2s ease,
+          box-shadow .2s ease;
       }
 
       @media (prefers-reduced-motion: reduce) {
         .reveal, .reveal-left, .reveal-right {
           transition: none;
           opacity: 1;
-          transform: none;
+          translate: 0 0;
         }
       }
 
@@ -1623,6 +1740,25 @@
         </div>
       </section>
 
+      <div class="section-fetec-blend" aria-hidden="true"></div>
+
+      <section class="stats-section">
+        <div class="stats-container">
+          <div class="stat-item reveal">
+            <h3 class="counter" data-target="3">0</h3>
+            <p>Turmas Participantes</p>
+          </div>
+          <div class="stat-item reveal">
+            <h3 class="counter" data-target="6">0</h3>
+            <p>Projetos Expostos</p>
+          </div>
+          <div class="stat-item reveal">
+            <h3 class="counter" data-target="100">0</h3>
+            <p>Desenvolvimento pelos Alunos</p>
+          </div>
+        </div>
+      </section>
+
       <section id="curso" class="section-curso">
         <div class="curso-container">
           <div class="container code-style-text">
@@ -1652,7 +1788,7 @@
       <section id="exposicoes" class="section-exposicoes">
         <div class="exposicoes-topo">
           <h2 class="reveal">Exposições</h2>
-          <a class="expo-all-btn reveal" href="#lista-exposicoes">Ver todas as exposições</a>
+          <a class="expo-all-btn" href="#lista-exposicoes">Ver todas as exposições</a>
         </div>
 
         <div class="expo-carousel" id="expoCarousel">
@@ -1660,7 +1796,7 @@
             <i class="fas fa-chevron-left"></i>
           </button>
 
-          <article class="expo-feature reveal" id="expoFeatureBlock">
+          <article class="expo-feature" id="expoFeatureBlock">
             <div class="expo-media">
               <img id="expoMainImage" src="./assets/scratch.jpg" alt="Scratch">
             </div>
@@ -1700,7 +1836,7 @@
         <div class="expo-dots" id="expoDots"></div>
 
         <div class="expo-lista" id="lista-exposicoes">
-          <article class="expo-card reveal" tabindex="0" role="link"
+          <article class="expo-card" tabindex="0" role="link"
             data-link="https://tavernf.github.io/scratchFetec/?classId=c6af9f25-f24a-40c1-a965-c255e58e8c64&assignmentId=8038706a-d8e9-40b2-9cb1-9293a20190b9&submissionId=cee6d9f2-fc96-513a-1a38-16f6d33ec50d#redes"
             data-target="_blank">
             <img src="./assets/scratch.jpg" alt="Scratch">
@@ -1712,7 +1848,7 @@
             </div>
           </article>
 
-          <article class="expo-card reveal" tabindex="0" role="link" data-link="https://jucdreis.github.io/disney-musicas"
+          <article class="expo-card" tabindex="0" role="link" data-link="https://jucdreis.github.io/disney-musicas"
             data-target="_blank">
             <img src="./assets/musica.png" alt="Qual é a Música?">
             <div>
@@ -1723,7 +1859,7 @@
             </div>  
           </article>
 
-          <article class="expo-card reveal" tabindex="0" role="link"
+          <article class="expo-card" tabindex="0" role="link"
             data-link="https://mlkhilo.github.io/hilo-cards/?fbclid=PAb21jcANKjh5leHRuA2FlbQIxMQABp8DnzI17LA4Y5rGiJSauopifNelmCSI-J9bEIezSnBdZ3Pnug-jXf_3ZiVDr_aem_lIrI5MazvrlS27ycsbkk_Q"
             data-target="_blank">
             <img src="./assets/hilocards.jpg" alt="Hilo Cards">
@@ -1735,7 +1871,7 @@
             </div>
           </article>
 
-          <article class="expo-card reveal" tabindex="0" role="link"
+          <article class="expo-card" tabindex="0" role="link"
             data-link="https://matzhen.github.io/Projeto-FETEC/?classId=15c5af82-c6ca-48ee-960f-2c20cecbab59&assignmentId=dd9af1f4-26f9-4c8d-9b86-26625dc99a76&submissionId=8b2b52d0-3d57-bcb6-9c7d-f60b9ded146a"
             data-target="_blank">
             <img src="./assets/Temperamentando.jpg" alt="Teste de Temperamento">
@@ -1747,7 +1883,7 @@
             </div>
           </article>
 
-          <article class="expo-card reveal" tabindex="0" role="link" data-link="https://livcarsu.github.io/VocacaoPolar/"
+          <article class="expo-card" tabindex="0" role="link" data-link="https://livcarsu.github.io/VocacaoPolar/"
             data-target="_blank">
             <img src="./assets/vocacional.png" alt="Teste Vocacional">
             <div>
@@ -1757,7 +1893,7 @@
             </div>
           </article>
 
-          <article class="expo-card reveal" tabindex="0" role="link" data-link="https://fetecdarcy.github.io/roboticadje"
+          <article class="expo-card" tabindex="0" role="link" data-link="https://fetecdarcy.github.io/roboticadje"
             data-target="_blank">
             <img src="./assets/robotica.jpg" alt="Robótica">
             <div>
@@ -1949,14 +2085,6 @@
         let autoPlayId = null;
         let isHovering = false;
 
-        // --- CORREÇÃO AQUI ---
-        // Limpa as classes de animação assim que o card terminar de deslizar
-        // Isso permite que o :hover volte a acessar a propriedade transform do CSS
-        expoFeatureBlock.addEventListener('animationend', () => {
-          expoFeatureBlock.classList.remove('slide-in-next', 'slide-in-prev');
-        });
-        // ---------------------
-
         // Lógica aprimorada para transição de slides e animação
         function goToSlide(index) {
           let direction = 'next';
@@ -2139,6 +2267,120 @@
         updateCarousel();
         startAutoPlay();
       });
+    </script>
+
+    <!-- Counter animado da seção Stats -->
+    <script>
+      (function () {
+        const counters = document.querySelectorAll(".counter");
+        let countersStarted = false;
+
+        function startCounters() {
+          if (countersStarted) return;
+          const statsSection = document.querySelector(".stats-section");
+          if (!statsSection) return;
+          const sectionTop = statsSection.getBoundingClientRect().top;
+
+          if (sectionTop < window.innerHeight - 100) {
+            countersStarted = true;
+            counters.forEach(counter => {
+              const target = Number(counter.dataset.target);
+              let current = 0;
+              const increment = target / 80;
+
+              const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                  counter.textContent = Math.floor(current);
+                  requestAnimationFrame(updateCounter);
+                } else {
+                  if (target === 100) {
+                    counter.textContent = "100%";
+                  } else if (target === 6) {
+                    counter.textContent = "6+";
+                  } else {
+                    counter.textContent = target;
+                  }
+                }
+              };
+              updateCounter();
+            });
+          }
+        }
+
+        window.addEventListener("scroll", startCounters, { passive: true });
+        startCounters();
+      })();
+    </script>
+
+    <!-- Seta de scroll para baixo -->
+    <style>
+      .scroll-down-arrow {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 999;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        animation: arrowBounce 1.8s ease-in-out infinite;
+        pointer-events: auto;
+      }
+
+      .scroll-down-arrow.hidden {
+        opacity: 0;
+        transform: translateY(12px);
+        pointer-events: none;
+        animation: none;
+      }
+
+      .scroll-down-arrow svg {
+        width: 38px;
+        height: 38px;
+      }
+
+      @keyframes arrowBounce {
+        0%, 100% { transform: translateY(0); }
+        50%       { transform: translateY(8px); }
+      }
+    </style>
+
+    <div class="scroll-down-arrow" id="scrollDownArrow" title="Rolar para baixo">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="6 9 12 15 18 9" stroke="#00FF41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <script>
+      (function () {
+        const arrow = document.getElementById('scrollDownArrow');
+
+        // Limiar: considera "no topo" se scrollY < 80px (volta a aparecer ao subir)
+        const THRESHOLD = 80;
+
+        function updateArrow() {
+          const scrollY = window.scrollY || window.pageYOffset;
+          if (scrollY > THRESHOLD) {
+            arrow.classList.add('hidden');
+          } else {
+            arrow.classList.remove('hidden');
+          }
+        }
+
+        window.addEventListener('scroll', updateArrow, { passive: true });
+        updateArrow(); // estado inicial
+
+        // Clicar na seta rola suavemente uma viewport para baixo
+        arrow.addEventListener('click', () => {
+          window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+        });
+      })();
     </script>
   </body>
 
